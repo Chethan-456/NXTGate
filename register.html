@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register — Nxt Gate Semi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Exo+2:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Exo 2', sans-serif;
+      background: #f4f7fb;
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+    }
+
+    /* NAV */
+    nav {
+      background: #fff; border-bottom: 1px solid #e2eaf2;
+      padding: 14px 40px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo { display: flex; align-items: center; gap: 9px; text-decoration: none; }
+    .logo-icon { width: 32px; height: 32px; background: linear-gradient(135deg,#0077b6,#00c6ff); border-radius: 7px; display:flex; align-items:center; justify-content:center; font-size:15px; }
+    .logo-text { font-family:'Rajdhani',sans-serif; font-size:1.1rem; font-weight:700; color:#0d1f35; }
+    .nav-back { display:flex; align-items:center; gap:5px; color:#7a95b0; font-size:0.85rem; font-weight:500; text-decoration:none; transition:color 0.2s; }
+    .nav-back:hover { color:#0077b6; }
+    .nav-back svg { transition:transform 0.2s; }
+    .nav-back:hover svg { transform:translateX(-3px); }
+
+    /* PAGE */
+    .page {
+      flex: 1;
+      display: flex; align-items: center; justify-content: center;
+      padding: 48px 20px;
+    }
+
+    /* CARD */
+    .card {
+      background: #fff;
+      border: 1px solid #e2eaf2;
+      border-radius: 16px;
+      width: 100%; max-width: 480px;
+      padding: 40px 40px 36px;
+      box-shadow: 0 4px 32px rgba(0,40,100,0.07);
+    }
+
+    /* HEADER */
+    .card h1 {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1.75rem; font-weight: 700;
+      color: #0d1f35; margin-bottom: 4px;
+    }
+    .card > p {
+      font-size: 0.875rem; color: #7a95b0;
+      margin-bottom: 28px; line-height: 1.5;
+    }
+    .divider { height: 1px; background: #edf2f7; margin-bottom: 24px; }
+
+    /* FIELDS */
+    .field { margin-bottom: 16px; }
+    .field label {
+      display: block;
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      color: #9ab0c8; margin-bottom: 6px;
+    }
+    .field input, .field select {
+      width: 100%;
+      background: #f7f9fc;
+      border: 1.5px solid #e2eaf2;
+      border-radius: 8px;
+      color: #0d1f35;
+      font-family: 'Exo 2', sans-serif;
+      font-size: 0.9rem;
+      padding: 11px 13px;
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
+      -webkit-appearance: none;
+    }
+    .field input:focus, .field select:focus {
+      border-color: #0077b6;
+      background: #fff;
+    }
+    .field input::placeholder { color: #c0ccd8; }
+    .field select {
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='%239ab0c8' d='M5 6L0 0h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 13px center;
+      background-color: #f7f9fc; padding-right: 34px;
+    }
+    .field select option { background: #fff; color: #0d1f35; }
+    .field.error input, .field.error select { border-color: #f87171; background: #fff8f8; }
+    .err { font-size: 0.71rem; color: #f87171; margin-top: 4px; display: none; }
+    .field.error .err { display: block; }
+
+    .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+    /* COURSE CARDS */
+    .course-label {
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      color: #9ab0c8; margin-bottom: 8px; display: block;
+    }
+    .course-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 8px; margin-bottom: 16px;
+    }
+    .c-opt {
+      border: 1.5px solid #e2eaf2; border-radius: 9px;
+      padding: 11px 13px; cursor: pointer;
+      transition: all 0.2s; position: relative;
+    }
+    .c-opt:hover { border-color: #a8c8e8; background: #f5f9ff; }
+    .c-opt.sel { border-color: #0077b6; background: #f0f7ff; }
+    .c-opt input { position: absolute; opacity: 0; pointer-events: none; }
+    .c-name {
+      font-size: 0.82rem; font-weight: 700; color: #0d1f35;
+      display: flex; align-items: center; gap: 6px; margin-bottom: 2px;
+    }
+    .c-name::before {
+      content: ''; width: 8px; height: 8px; border-radius: 50%;
+      border: 1.5px solid #c8d8e8; flex-shrink: 0; transition: all 0.2s;
+    }
+    .c-opt.sel .c-name::before { background: #0077b6; border-color: #0077b6; }
+    .c-meta { font-size: 0.71rem; color: #9ab0c8; padding-left: 14px; }
+
+    /* SUBMIT */
+    .btn-submit {
+      width: 100%;
+      background: #0a2a4a;
+      color: #fff;
+      font-family: 'Exo 2', sans-serif;
+      font-size: 0.95rem; font-weight: 700;
+      padding: 13px;
+      border-radius: 8px; border: none;
+      cursor: pointer;
+      transition: background 0.2s, opacity 0.2s;
+      margin-top: 4px;
+      letter-spacing: 0.02em;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .btn-submit:hover:not(:disabled) { background: #0077b6; }
+    .btn-submit:disabled { opacity: 0.65; cursor: not-allowed; }
+
+    /* Spinner */
+    .spinner {
+      width: 16px; height: 16px;
+      border: 2px solid rgba(255,255,255,0.35);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      display: none;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Error toast */
+    .toast-error {
+      display: none;
+      align-items: center; gap: 10px;
+      margin-top: 12px; padding: 12px 16px;
+      background: #fff0f0; border: 1px solid #f0b0b0;
+      border-radius: 9px; color: #c02020;
+      font-size: 0.83rem; font-weight: 600;
+      animation: fadeIn 0.3s ease;
+    }
+    .toast-error.show { display: flex; }
+
+    /* SUCCESS */
+    .success { display: none; text-align: center; padding: 12px 0; }
+    .success.show { display: block; animation: fadeIn 0.4s ease both; }
+    @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+    .success-icon {
+      width: 60px; height: 60px; border-radius: 50%;
+      background: #f0fdf8; border: 1.5px solid #86efac;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 16px;
+    }
+    .success h2 { font-family:'Rajdhani',sans-serif; font-size:1.55rem; font-weight:700; color:#0d1f35; margin-bottom:8px; }
+    .success p { font-size:0.875rem; color:#7a95b0; line-height:1.65; margin-bottom:20px; }
+    .ref-tag {
+      display: inline-block;
+      background: #f0f7ff; border: 1px solid #cce0f5;
+      border-radius: 6px; padding: 8px 18px;
+      font-size: 0.8rem; color: #0077b6; font-weight: 700;
+      letter-spacing: 0.05em; margin-bottom: 22px;
+    }
+    .btn-home {
+      display: inline-block; background: #0a2a4a; color: #fff;
+      font-family: 'Exo 2',sans-serif; font-size:0.88rem; font-weight:700;
+      padding: 12px 28px; border-radius: 8px; text-decoration: none;
+      transition: background 0.2s;
+    }
+    .btn-home:hover { background: #0077b6; }
+
+    @media (max-width: 520px) {
+      nav { padding: 12px 20px; }
+      .card { padding: 28px 20px 24px; }
+      .row2 { grid-template-columns: 1fr; }
+      .course-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="assets/nxtgatelogo.jpeg">
+    <div class="logo-icon">💠</div>
+    <span class="logo-text">Nxt Gate Semi</span>
+  </a>
+  <a class="nav-back" href="index.html">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+    Back to Home
+  </a>
+</nav>
+
+<div class="page">
+  <div class="card">
+
+    <!-- FORM -->
+    <div id="formSection">
+      <h1>Enroll Now</h1>
+      <p>Fill in your details and we'll get back to you shortly</p>
+      <div class="divider"></div>
+
+      <div class="row2">
+        <div class="field" id="f-fn">
+          <label>First Name *</label>
+          <input type="text" id="i-fn" placeholder="Rahul">
+          <div class="err">Required</div>
+        </div>
+        <div class="field" id="f-ln">
+          <label>Last Name *</label>
+          <input type="text" id="i-ln" placeholder="Sharma">
+          <div class="err">Required</div>
+        </div>
+      </div>
+
+      <div class="field" id="f-em">
+        <label>Email Address *</label>
+        <input type="email" id="i-em" placeholder="rahul@example.com">
+        <div class="err">Enter a valid email</div>
+      </div>
+
+      <div class="row2">
+        <div class="field" id="f-ph">
+          <label>Phone Number *</label>
+          <input type="tel" id="i-ph" placeholder="+91 98765 43210">
+          <div class="err">Required</div>
+        </div>
+        <div class="field" id="f-ag">
+          <label>Age *</label>
+          <input type="number" id="i-ag" placeholder="22" min="16" max="60">
+          <div class="err">Enter a valid age</div>
+        </div>
+      </div>
+
+      <div class="field" id="f-pr">
+        <label>Type of Proficiency *</label>
+        <select id="i-pr">
+          <option value="" disabled selected>Select your level</option>
+          <option>Beginner — No prior experience</option>
+          <option>Intermediate — Some exposure to VLSI / Electronics</option>
+          <option>Advanced — Working experience in the field</option>
+        </select>
+        <div class="err">Required</div>
+      </div>
+
+      <span class="course-label">Course *</span>
+      <div class="course-grid" id="cGrid">
+        <div class="c-opt sel" data-course="VLSI Front-End Design">
+          <input type="radio" name="course" checked>
+          <div class="c-name">VLSI Front-End</div>
+          <div class="c-meta">RTL · Verification · 6 mo</div>
+        </div>
+        <div class="c-opt" data-course="Physical Design">
+          <input type="radio" name="course">
+          <div class="c-name">VLSI Back-End</div>
+          <div class="c-meta">Physical Design · 4 mo</div>
+        </div>
+        <div class="c-opt" data-course="Design Verification (UVM)">
+          <input type="radio" name="course">
+          <div class="c-name">Design Verification</div>
+          <div class="c-meta">SystemVerilog · UVM · 5 mo</div>
+        </div>
+        <div class="c-opt" data-course="Analog IC Design">
+          <input type="radio" name="course">
+          <div class="c-name">Analog IC Design</div>
+          <div class="c-meta">CMOS · PLL · ADC · 6 mo</div>
+        </div>
+        <div class="c-opt" data-course="Static Timing Analysis">
+          <input type="radio" name="course">
+          <div class="c-name">Static Timing Analysis</div>
+          <div class="c-meta">STA · SDC · ECO · 3 mo</div>
+        </div>
+        <div class="c-opt" data-course="Digital Design Fundamentals">
+          <input type="radio" name="course">
+          <div class="c-name">Digital Design</div>
+          <div class="c-meta">Beginner-friendly · 2 mo</div>
+        </div>
+      </div>
+
+      <button class="btn-submit" id="submitBtn">
+        <span id="btnText">Submit Registration</span>
+        <div class="spinner" id="btnSpinner"></div>
+      </button>
+
+      <div class="toast-error" id="toastError">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <span id="errMsg">Something went wrong. Please try again.</span>
+      </div>
+    </div>
+
+    <!-- SUCCESS -->
+    <div class="success" id="successBox">
+      <div class="success-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <h2>Registration Received!</h2>
+      <p>Thank you! Our admissions team will reach out to you within 24 hours to confirm your enrollment.</p>
+      <div class="ref-tag" id="refTag"></div>
+      <br>
+      <a href="index.html" class="btn-home">Back to Home</a>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     FIREBASE INTEGRATION
+══════════════════════════════════════ -->
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import { getFirestore, collection, addDoc, serverTimestamp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+/* Firebase Config */
+const firebaseConfig = {
+  apiKey: "AIzaSyAr_X9ZkASTRUzu1bQQ361V_87bs59s3yg",
+  authDomain: "nxtgate-380d1.firebaseapp.com",
+  projectId: "nxtgate-380d1",
+  storageBucket: "nxtgate-380d1.firebasestorage.app",
+  messagingSenderId: "722921796587",
+  appId: "1:722921796587:web:e09ead9f1bf1bde1601fae",
+  measurementId: "G-Q2KHM0ZX8V"
+};
+
+const app = initializeApp(firebaseConfig);
+const db  = getFirestore(app);
+
+
+/* Helper */
+function $(id){ return document.getElementById(id); }
+
+
+/* Course Selection */
+let selectedCourse = 'VLSI Front-End Design';
+
+document.querySelectorAll('.c-opt').forEach(opt=>{
+  opt.addEventListener('click',()=>{
+    document.querySelectorAll('.c-opt').forEach(o=>o.classList.remove('sel'));
+    opt.classList.add('sel');
+    selectedCourse = opt.dataset.course;
+  });
+});
+
+
+/* Clear errors while typing */
+document.querySelectorAll('input, select').forEach(el=>{
+  el.addEventListener('input',()=>el.closest('.field')?.classList.remove('error'));
+  el.addEventListener('change',()=>el.closest('.field')?.classList.remove('error'));
+});
+
+
+/* Loading state */
+function setLoading(on){
+  $('submitBtn').disabled = on;
+  $('btnText').style.display = on ? 'none':'inline';
+  $('btnSpinner').style.display = on ? 'block':'none';
+}
+
+
+/* Error toast */
+function showError(msg){
+  $('errMsg').textContent = msg;
+  $('toastError').classList.add('show');
+}
+
+function hideError(){
+  $('toastError').classList.remove('show');
+}
+
+
+/* Validation helper */
+function chk(fid,iid,fn){
+  const field=$(fid);
+  const val=$(iid).value;
+
+  if(!fn(val)){
+    field.classList.add('error');
+    return false;
+  }
+
+  field.classList.remove('error');
+  return true;
+}
+
+
+/* Submit */
+async function handleSubmit(e){
+
+  if(e) e.preventDefault();
+
+  if($('submitBtn').disabled) return;
+
+  hideError();
+
+  let ok=true;
+
+  ok = chk('f-fn','i-fn',v=>v.trim().length>0) && ok;
+  ok = chk('f-ln','i-ln',v=>v.trim().length>0) && ok;
+
+  ok = chk('f-em','i-em',
+  v=>/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) && ok;
+
+  /* Improved phone validation (India friendly) */
+  ok = chk('f-ph','i-ph',
+  v=>/^[6-9]\d{9}$/.test(v.replace(/\D/g,''))) && ok;
+
+  ok = chk('f-ag','i-ag',
+  v=>v>=16 && v<=60) && ok;
+
+  ok = chk('f-pr','i-pr',
+  v=>v!=='') && ok;
+
+  if(!ok) return;
+
+  setLoading(true);
+
+  const ref='NGS-'+Date.now().toString().slice(-6);
+
+  try{
+
+    await addDoc(collection(db,'registrations'),{
+
+      referenceId:ref,
+
+      firstName:$('i-fn').value.trim(),
+      lastName:$('i-ln').value.trim(),
+      email:$('i-em').value.trim(),
+      phone:$('i-ph').value.trim(),
+
+      age:Number($('i-ag').value),
+      proficiency:$('i-pr').value,
+      course:selectedCourse,
+
+      registeredAt:serverTimestamp(),
+      source:'register_page'
+
+    });
+
+    $('refTag').textContent='Reference ID: '+ref;
+
+    $('formSection').style.display='none';
+    $('successBox').classList.add('show');
+
+    window.scrollTo({
+      top:0,
+      behavior:'smooth'
+    });
+
+  }
+
+  catch(err){
+
+    console.error("Firestore Error:",err);
+
+    let msg='Submission failed. Please try again.';
+
+    if(err.code==='permission-denied')
+      msg='Database permission denied';
+
+    if(err.code==='unavailable')
+      msg='Network issue detected';
+
+    showError(msg);
+
+  }
+
+  finally{
+    setLoading(false);
+  }
+
+}
+
+
+/* Button listener */
+$('submitBtn').addEventListener('click',handleSubmit);
+
+</script>
+
+</body>
+</html>

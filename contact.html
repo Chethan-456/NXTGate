@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0"/>
+  <title>Contact — Nxt Gate Semi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Exo+2:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { font-family: 'Exo 2', sans-serif; background: #f0f4f8; color: #0d1f35; overflow-x: hidden; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 40px;
+      background: rgba(2,12,27,0.95); backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0,198,255,0.12);
+    }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo-icon { width: 36px; height: 36px; background: linear-gradient(135deg,#0077b6,#00c6ff); border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 17px; }
+    .logo-text { font-family: 'Rajdhani', sans-serif; font-size: 1.2rem; font-weight: 700; color: #fff; }
+    .nav-links { display: flex; align-items: center; gap: 30px; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: #00c6ff; }
+    .nav-links a.active { color: #00c6ff; }
+    .btn-enroll { background: linear-gradient(135deg,#0077b6,#00c6ff); color: #fff; border: none; padding: 9px 22px; border-radius: 6px; font-family: 'Exo 2',sans-serif; font-size: 0.88rem; font-weight: 600; cursor: pointer; transition: opacity 0.2s; }
+    .btn-enroll:hover { opacity: 0.85; }
+    .nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .nav-toggle span { width: 22px; height: 2px; background: #fff; border-radius: 2px; }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      padding: 110px 40px 72px;
+      background: linear-gradient(150deg, #010b1a 0%, #03203d 55%, #010b1a 100%);
+      text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .page-header::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: radial-gradient(rgba(0,198,255,0.08) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+    .page-header::after {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 70% at 50% 50%, rgba(0,80,180,0.22) 0%, transparent 70%);
+    }
+    .page-header-inner { position: relative; z-index: 2; }
+    .breadcrumb { display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 16px; font-size: 0.82rem; color: rgba(180,215,255,0.5); }
+    .breadcrumb a { color: rgba(180,215,255,0.5); text-decoration: none; transition: color 0.2s; }
+    .breadcrumb a:hover { color: #00c6ff; }
+    .breadcrumb span { color: rgba(180,215,255,0.3); }
+    .page-header h1 {
+      font-family: 'Exo 2', sans-serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800; color: #fff;
+      margin-bottom: 14px; line-height: 1.15;
+    }
+    .page-header p {
+      font-size: 1rem; color: rgba(180,215,255,0.7);
+      max-width: 520px; margin: 0 auto; line-height: 1.65;
+    }
+
+    /* ── CONTACT INFO CARDS ── */
+    .contact-cards-section {
+      background: #f0f4f8;
+      padding: 60px 40px 0;
+    }
+    .contact-cards-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+    .contact-info-card {
+      background: #fff;
+      border: 1px solid #e2eaf2;
+      border-radius: 14px;
+      padding: 32px 24px 28px;
+      text-align: center;
+      transition: box-shadow 0.22s, transform 0.22s;
+    }
+    .contact-info-card:hover {
+      box-shadow: 0 8px 28px rgba(0,80,180,0.1);
+      transform: translateY(-3px);
+    }
+    .cic-icon {
+      width: 54px; height: 54px;
+      border-radius: 50%;
+      background: #f0f5fb;
+      border: 1.5px solid #dce8f4;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 18px;
+      color: #4a7ab5;
+    }
+    .cic-title {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 1rem; font-weight: 700;
+      color: #0d1f35; margin-bottom: 8px;
+    }
+    .cic-detail {
+      font-size: 0.84rem; color: #5a7090;
+      line-height: 1.65;
+    }
+    .cic-detail a { color: #5a7090; text-decoration: none; }
+    .cic-detail a:hover { color: #0077b6; }
+
+    /* ── MAIN CONTACT SECTION ── */
+    .contact-main {
+      max-width: 1100px; margin: 0 auto;
+      padding: 56px 40px 80px;
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .contact-left { }
+    .contact-left h2 {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 1.5rem; font-weight: 800;
+      color: #0d1f35; margin-bottom: 10px;
+    }
+    .contact-left > p {
+      font-size: 0.88rem; color: #6a85a0;
+      line-height: 1.7; margin-bottom: 28px;
+    }
+
+    .info-item {
+      display: flex; align-items: flex-start; gap: 14px;
+      margin-bottom: 20px;
+    }
+    .info-icon {
+      width: 40px; height: 40px; flex-shrink: 0;
+      border-radius: 10px;
+      background: #eef4fb;
+      border: 1px solid #d8e8f4;
+      display: flex; align-items: center; justify-content: center;
+      color: #0077b6;
+    }
+    .info-text label {
+      display: block;
+      font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: #9ab0c8; margin-bottom: 3px;
+    }
+    .info-text span {
+      font-size: 0.88rem; color: #334a63; line-height: 1.55;
+    }
+    .info-text a { color: #334a63; text-decoration: none; }
+    .info-text a:hover { color: #0077b6; }
+
+    .map-box {
+      margin-top: 28px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #dce8f4;
+      height: 200px;
+      background: #e8eff7;
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .map-box iframe { width: 100%; height: 100%; border: 0; }
+    .map-placeholder { text-align: center; color: #8aa5bf; }
+    .map-placeholder svg { margin-bottom: 8px; }
+    .map-placeholder p { font-size: 0.82rem; }
+
+    .social-row { display: flex; gap: 10px; margin-top: 24px; }
+    .social-btn {
+      display: flex; align-items: center; gap: 8px;
+      padding: 9px 16px;
+      border-radius: 8px;
+      border: 1px solid #dce8f4;
+      background: #fff;
+      color: #5a7090;
+      font-size: 0.8rem; font-weight: 600;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .social-btn:hover { border-color: #0077b6; color: #0077b6; background: #f0f6ff; }
+
+    /* ── FORM ── */
+    .contact-form-box {
+      background: #fff;
+      border: 1px solid #e2eaf2;
+      border-radius: 16px;
+      padding: 40px;
+    }
+    .contact-form-box h3 {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 1.25rem; font-weight: 800;
+      color: #0d1f35; margin-bottom: 6px;
+    }
+    .contact-form-box > p {
+      font-size: 0.85rem; color: #7a95b0;
+      margin-bottom: 28px; line-height: 1.6;
+    }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+    .form-group { margin-bottom: 14px; }
+    .form-group label {
+      display: block;
+      font-size: 0.75rem; font-weight: 700;
+      letter-spacing: 0.07em; text-transform: uppercase;
+      color: #7a95b0; margin-bottom: 7px;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      background: #f7f9fc;
+      border: 1px solid #dce8f4;
+      border-radius: 8px;
+      color: #0d1f35;
+      font-family: 'Exo 2', sans-serif;
+      font-size: 0.9rem; font-weight: 400;
+      padding: 11px 14px;
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
+      -webkit-appearance: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: #0077b6;
+      background: #f0f6ff;
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: #b0c0d4; }
+    .form-group textarea { resize: vertical; min-height: 110px; }
+    .form-group select {
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='%238aa5bf' d='M5 6L0 0h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
+    }
+    .form-group select option { background: #fff; }
+
+    /* ── Error states ── */
+    .form-group input.error,
+    .form-group select.error,
+    .form-group textarea.error {
+      border-color: #e05050;
+      background: #fff8f8;
+    }
+    .field-error {
+      font-size: 0.72rem;
+      color: #e05050;
+      margin-top: 5px;
+      display: none;
+    }
+    .field-error.show { display: block; }
+
+    .form-submit {
+      width: 100%;
+      background: linear-gradient(135deg, #0077b6, #00c6ff);
+      color: #fff;
+      font-family: 'Exo 2', sans-serif;
+      font-size: 0.95rem; font-weight: 700;
+      padding: 14px;
+      border-radius: 8px; border: none;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+      box-shadow: 0 4px 18px rgba(0,198,255,0.25);
+      margin-top: 6px;
+      letter-spacing: 0.02em;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .form-submit:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(0,198,255,0.4);
+    }
+    .form-submit:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+
+    /* Spinner */
+    .spinner {
+      width: 16px; height: 16px;
+      border: 2px solid rgba(255,255,255,0.4);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      display: none;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Toast notifications */
+    .toast {
+      display: none;
+      align-items: center; gap: 12px;
+      margin-top: 16px;
+      padding: 14px 18px;
+      border-radius: 10px;
+      font-family: 'Exo 2', sans-serif;
+      font-size: 0.88rem; font-weight: 600;
+      animation: slideIn 0.3s ease;
+    }
+    @keyframes slideIn { from { opacity:0; transform: translateY(6px); } to { opacity:1; transform: translateY(0); } }
+    .toast.success {
+      background: #edfaf3;
+      border: 1px solid #a8dfc5;
+      color: #1a7a4a;
+    }
+    .toast.error {
+      background: #fff0f0;
+      border: 1px solid #f0b0b0;
+      color: #c02020;
+    }
+    .toast.show { display: flex; }
+
+    /* ── FAQ ── */
+    .faq-section {
+      background: #fff;
+      border-top: 1px solid #e8eef4;
+      padding: 72px 40px 80px;
+    }
+    .faq-inner { max-width: 760px; margin: 0 auto; }
+    .faq-title {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 1.7rem; font-weight: 800;
+      color: #0d1f35; text-align: center; margin-bottom: 8px;
+    }
+    .faq-sub {
+      font-size: 0.9rem; color: #7a95b0;
+      text-align: center; margin-bottom: 40px;
+    }
+    .faq-item {
+      border: 1px solid #e2eaf2;
+      border-radius: 10px;
+      margin-bottom: 12px;
+      overflow: hidden;
+      transition: box-shadow 0.2s;
+    }
+    .faq-item:hover { box-shadow: 0 4px 16px rgba(0,80,180,0.07); }
+    .faq-question {
+      width: 100%; background: #fff;
+      border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 22px;
+      font-family: 'Exo 2', sans-serif;
+      font-size: 0.95rem; font-weight: 700;
+      color: #0d1f35; text-align: left;
+      transition: background 0.2s;
+    }
+    .faq-question:hover { background: #f7f9fc; }
+    .faq-question.open { background: #f0f6ff; color: #0077b6; }
+    .faq-chevron {
+      flex-shrink: 0; width: 20px; height: 20px;
+      border-radius: 50%; background: #eef4fb;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform 0.3s, background 0.2s;
+    }
+    .faq-question.open .faq-chevron { transform: rotate(180deg); background: #ddeeff; }
+    .faq-answer {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.25s ease;
+      padding: 0 22px;
+      font-size: 0.88rem; color: #5a7090; line-height: 1.75;
+    }
+    .faq-answer.open { max-height: 200px; padding: 0 22px 18px; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 767px) {
+      nav { padding: 12px 20px; }
+      .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(2,12,27,0.98); padding: 16px 20px; gap: 4px; border-bottom: 1px solid rgba(0,198,255,0.1); }
+      .nav-links.open { display: flex; }
+      .nav-links li { width: 100%; }
+      .nav-links a { display: block; padding: 10px 0; font-size: 0.95rem; }
+      .btn-enroll { display: none; }
+      .nav-toggle { display: flex; }
+      .page-header { padding: 90px 20px 52px; }
+      .contact-cards-section { padding: 36px 16px 0; }
+      .contact-cards-inner { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .contact-info-card { padding: 22px 16px 18px; }
+      .contact-main { grid-template-columns: 1fr; gap: 28px; padding: 32px 16px 60px; }
+      .form-row { grid-template-columns: 1fr; }
+      .contact-form-box { padding: 28px 20px; }
+      .faq-section { padding: 52px 16px 60px; }
+      .social-row { flex-wrap: wrap; }
+    }
+    @media (min-width: 768px) and (max-width: 1023px) {
+      nav { padding: 14px 28px; }
+      .page-header { padding: 100px 32px 60px; }
+      .contact-cards-section { padding: 48px 28px 0; }
+      .contact-cards-inner { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+      .contact-main { grid-template-columns: 1fr; gap: 36px; padding: 40px 28px 70px; }
+      .form-row { grid-template-columns: 1fr 1fr; }
+      .faq-section { padding: 60px 28px 70px; }
+    }
+    @media (min-width: 1024px) {
+      .contact-cards-inner { grid-template-columns: repeat(4, 1fr); }
+      .contact-main { grid-template-columns: 1fr 1.5fr; }
+    }
+    @media (min-width: 1280px) {
+      nav { padding: 14px 60px; }
+    }
+
+    /* ── VISUAL PANEL ── */
+    .visual-panel {
+      display: flex; flex-direction: column; gap: 20px;
+    }
+
+    /* Stats grid */
+    .stats-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+    }
+    .stat-card {
+      background: #fff;
+      border: 1px solid #e2eaf2;
+      border-radius: 14px;
+      padding: 22px 20px;
+      text-align: center;
+      transition: box-shadow 0.22s, transform 0.22s;
+    }
+    .stat-card:hover { box-shadow: 0 6px 24px rgba(0,80,180,0.1); transform: translateY(-2px); }
+    .stat-icon {
+      width: 44px; height: 44px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 12px;
+    }
+    .stat-num {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 1.9rem; font-weight: 800;
+      color: #0d1f35; line-height: 1;
+      margin-bottom: 5px;
+    }
+    .stat-label {
+      font-size: 0.78rem; color: #7a95b0; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.06em;
+    }
+
+    /* WhatsApp button */
+    .whatsapp-btn {
+      display: flex; align-items: center; gap: 12px;
+      background: linear-gradient(135deg, #25d366, #128c7e);
+      color: #fff; text-decoration: none;
+      padding: 16px 22px; border-radius: 14px;
+      font-family: 'Exo 2', sans-serif;
+      font-size: 1rem; font-weight: 700;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 18px rgba(37,211,102,0.3);
+      position: relative;
+    }
+    .whatsapp-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(37,211,102,0.45); }
+    .wa-badge {
+      margin-left: auto;
+      background: rgba(255,255,255,0.2);
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 0.72rem; font-weight: 600;
+      white-space: nowrap;
+    }
+
+    /* Why reach out box */
+    .reach-out-box {
+      background: #fff;
+      border: 1px solid #e2eaf2;
+      border-radius: 14px;
+      padding: 26px 24px;
+    }
+    .reach-out-box h4 {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 1rem; font-weight: 800;
+      color: #0d1f35; margin-bottom: 18px;
+    }
+    .reach-list {
+      list-style: none; display: flex; flex-direction: column; gap: 16px;
+    }
+    .reach-list li {
+      display: flex; align-items: flex-start; gap: 12px;
+    }
+    .reach-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      flex-shrink: 0; margin-top: 5px;
+    }
+    .reach-list strong {
+      display: block; font-size: 0.88rem; color: #0d1f35;
+      font-weight: 700; margin-bottom: 2px;
+    }
+    .reach-list p {
+      font-size: 0.8rem; color: #7a95b0; line-height: 1.55; margin: 0;
+    }
+
+    /* Response badge */
+    .response-badge {
+      display: flex; align-items: center; gap: 8px;
+      background: #eef6ff;
+      border: 1px solid #c8dff5;
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-size: 0.82rem; color: #4a7ab5;
+    }
+    .response-badge strong { color: #0077b6; }
+
+    /* Map box override — taller for better UX */
+    .map-box { height: 240px; }
+    .map-box iframe { border-radius: 12px; }
+
+    @media (max-width: 767px) {
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .wa-badge { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="assets/nxtgatelogo.jpeg">
+    <div class="logo-icon">💠</div>
+    <span class="logo-text">Nxt Gate Semi</span>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="courses.html">Courses</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
+    <li>
+      <a href="register.html">
+        <button class="btn-enroll">Enroll Now</button>
+      </a>
+    </li>
+  </ul>
+  <div class="nav-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span>›</span>
+      <span>Contact</span>
+    </div>
+    <h1>Get In Touch</h1>
+    <p>Have questions about our courses? We're here to help you start your VLSI career journey</p>
+  </div>
+</div>
+
+<!-- CONTACT INFO CARDS -->
+<div class="contact-cards-section">
+  <div class="contact-cards-inner">
+    <div class="contact-info-card">
+      <div class="cic-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      </div>
+      <div class="cic-title">Visit Us</div>
+      <div class="cic-detail">Kengeri, Bangalore, KA 560060</div>
+    </div>
+    <div class="contact-info-card">
+      <div class="cic-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.7 12a19.79 19.79 0 0 1-3-8.57A2 2 0 0 1 3.63 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      </div>
+      <div class="cic-title">Call Us</div>
+      <div class="cic-detail"><a href="tel:+919886446024">+91 98864 46024</a></div>
+    </div>
+    <div class="contact-info-card">
+      <div class="cic-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      </div>
+      <div class="cic-title">Email Us</div>
+      <div class="cic-detail">
+        <a href="/cdn-cgi/l/email-protection#a9c0c7cfc6e9c7d1ddcec8ddccdaccc4c087cac6c4"><span class="__cf_email__" data-cfemail="127b7c747d527c6a667573667761777f7b3c717d7f">[email&#160;protected]</span></a><br>
+        <a href="/cdn-cgi/l/email-protection#6c0d0801051f1f0503021f2c0214180b0d18091f090105420f0301"><span class="__cf_email__" data-cfemail="a0c1c4cdc9d3d3c9cfced3e0ced8d4c7c1d4c5d3c5cdc98ec3cfcd">[email&#160;protected]</span></a>
+      </div>
+    </div>
+    <div class="contact-info-card">
+      <div class="cic-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <div class="cic-title">Office Hours</div>
+      <div class="cic-detail">
+        Mon – Fri: 9:00 AM – 6:00 PM<br>
+        Sat: 10:00 AM – 4:00 PM
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN CONTACT -->
+<div class="contact-main">
+
+  <!-- Left: Info -->
+  <div class="contact-left">
+    <h2>Let's Start a Conversation</h2>
+    <p>Whether you're a student exploring options, an institution looking to partner, or a company seeking to upskill your team — we'd love to hear from you.</p>
+
+    <div class="info-item">
+      <div class="info-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      </div>
+      <div class="info-text">
+        <label>Address</label>
+        <span>Kengeri, Bangalore, Karnataka 560060</span>
+      </div>
+    </div>
+    <div class="info-item">
+      <div class="info-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.7 12a19.79 19.79 0 0 1-3-8.57A2 2 0 0 1 3.63 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      </div>
+      <div class="info-text">
+        <label>Phone</label>
+        <span><a href="tel:+919886446024">+91 98864 46024</a></span>
+      </div>
+    </div>
+    <div class="info-item">
+      <div class="info-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      </div>
+      <div class="info-text">
+        <label>Email</label>
+        <span>
+          <a href="mailto:info@nxtgatesemi.com">info@nxtgatesemi.com</a><br>
+          <a href="mailto:admissions@nxtgatesemi.com">admissions@nxtgatesemi.com</a>
+        </span>
+      </div>
+    </div>
+    <div class="info-item">
+      <div class="info-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <div class="info-text">
+        <label>Office Hours</label>
+        <span>Mon – Fri: 9:00 AM – 6:00 PM<br>Sat: 10:00 AM – 4:00 PM</span>
+      </div>
+    </div>
+
+    <!-- Working Google Maps embed — Kengeri, Bangalore -->
+    <div class="map-box">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.9175!2d77.4833!3d12.9088!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae3f0a3b0b0001%3A0x1!2sKengeri%2C%20Bengaluru%2C%20Karnataka%20560060!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+        width="100%" height="100%" style="border:0;" allowfullscreen=""
+        loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+
+    <div class="social-row">
+      <a href="#" class="social-btn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+        LinkedIn
+      </a>
+      <a href="#" class="social-btn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        Twitter / X
+      </a>
+      <a href="#" class="social-btn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-1.96C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.4 19.54C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58zM9.75 15.02V8.98L15.5 12z"/></svg>
+        YouTube
+      </a>
+    </div>
+  </div>
+
+  <!-- Right: Visual Panel -->
+  <div class="visual-panel">
+
+    <!-- Stats grid -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon" style="background:linear-gradient(135deg,#0077b6,#00c6ff);">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="stat-num" data-target="1200">0</div>
+        <div class="stat-label">Students Trained</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="background:linear-gradient(135deg,#7b2ff7,#b06aff);">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <div class="stat-num" data-target="15">0</div>
+        <div class="stat-label">Expert Instructors</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="background:linear-gradient(135deg,#00b09b,#00d2a0);">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <div class="stat-num" data-target="92">0</div>
+        <div class="stat-label">% Placement Rate</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="background:linear-gradient(135deg,#f7971e,#ffd200);">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <div class="stat-num" data-target="4.8">0</div>
+        <div class="stat-label">Average Rating</div>
+      </div>
+    </div>
+
+    <!-- Quick contact via WhatsApp -->
+    <a href="#" target="_blank" class="whatsapp-btn">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+      Chat on WhatsApp
+      <span class="wa-badge">Usually replies in minutes</span>
+    </a>
+
+    <!-- Why reach out section -->
+    <div class="reach-out-box">
+      <h4>Why Reach Out to Us?</h4>
+      <ul class="reach-list">
+        <li>
+          <span class="reach-dot" style="background:#00c6ff;"></span>
+          <div>
+            <strong>Free Career Counselling</strong>
+            <p>Get personalized advice on which VLSI track suits your background and goals.</p>
+          </div>
+        </li>
+        <li>
+          <span class="reach-dot" style="background:#b06aff;"></span>
+          <div>
+            <strong>Demo Class Available</strong>
+            <p>Attend a free demo session before you enroll — no commitment needed.</p>
+          </div>
+        </li>
+        <li>
+          <span class="reach-dot" style="background:#00d2a0;"></span>
+          <div>
+            <strong>Flexible Batches</strong>
+            <p>Weekend, weekday, and fast-track batches to fit your schedule.</p>
+          </div>
+        </li>
+        <li>
+          <span class="reach-dot" style="background:#ffd200;"></span>
+          <div>
+            <strong>Corporate Tie-ups</strong>
+            <p>Customized upskilling programs for semiconductor R&D teams.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Response time badge -->
+    <div class="response-badge">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0077b6" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      <span>Average response time: <strong>under 2 hours</strong> on business days</span>
+    </div>
+
+  </div>
+
+</div>
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="faq-inner">
+    <h2 class="faq-title">Frequently Asked Questions</h2>
+    <p class="faq-sub">Quick answers to common questions about our programs</p>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        What are the prerequisites for joining VLSI courses?
+        <span class="faq-chevron"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span>
+      </button>
+      <div class="faq-answer">A basic understanding of digital electronics or electrical engineering is helpful, but our foundational courses start from scratch. For advanced tracks, some prior exposure to Verilog or circuit design is recommended.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        Are the courses conducted online or offline?
+        <span class="faq-chevron"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span>
+      </button>
+      <div class="faq-answer">We offer both online (live + recorded) and offline classroom sessions at our Bangalore center. Corporate training can be delivered on-site at your premises as well.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        Do you provide placement assistance?
+        <span class="faq-chevron"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span>
+      </button>
+      <div class="faq-answer">Yes. We provide dedicated placement support including resume building, mock interviews, and direct referrals to our hiring partner network in the semiconductor industry.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        What EDA tools will I get access to during training?
+        <span class="faq-chevron"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span>
+      </button>
+      <div class="faq-answer">Students get hands-on access to industry-standard tools from Cadence, Synopsys, and Mentor Graphics as part of their lab sessions throughout the program.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        Can companies partner with NxtGate for employee training?
+        <span class="faq-chevron"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span>
+      </button>
+      <div class="faq-answer">Absolutely. We offer fully customized corporate training programs tailored to your team's specific technology stack, timelines, and learning objectives. Contact us to request a proposal.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:linear-gradient(180deg,#031528 0%,#020c1b 100%);border-top:1px solid rgba(0,198,255,0.1);padding:48px 40px 0;">
+  <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1.6fr 1fr 1fr 1.4fr;gap:48px;padding-bottom:48px;">
+    <div>
+      <a href="index.html" style="display:flex;align-items:center;gap:10px;text-decoration:none;margin-bottom:14px;">
+        <div style="width:36px;height:36px;background:linear-gradient(135deg,#0077b6,#00c6ff);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:17px;">💠</div>
+        <span style="font-family:'Rajdhani',sans-serif;font-size:1.1rem;font-weight:700;color:#fff;">Nxt Gate Semi</span>
+      </a>
+      <p style="font-size:0.82rem;color:rgba(180,215,255,0.5);line-height:1.7;max-width:210px;margin-bottom:20px;">Leading the way in VLSI and semiconductor training with industry-focused curriculum and expert instructors.</p>
+    </div>
+    <div>
+      <h4 style="font-family:'Rajdhani',sans-serif;font-size:1rem;font-weight:700;color:#fff;margin-bottom:18px;">Quick Links</h4>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:11px;">
+        <li><a href="index.html" style="font-size:0.85rem;color:rgba(180,215,255,0.55);text-decoration:none;">Home</a></li>
+        <li><a href="courses.html" style="font-size:0.85rem;color:rgba(180,215,255,0.55);text-decoration:none;">Courses</a></li>
+        <li><a href="contact.html" style="font-size:0.85rem;color:#00c6ff;text-decoration:none;">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 style="font-family:'Rajdhani',sans-serif;font-size:1rem;font-weight:700;color:#fff;margin-bottom:18px;">Popular Courses</h4>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:11px;">
+        <li><a href="courses.html" style="font-size:0.85rem;color:rgba(180,215,255,0.55);text-decoration:none;">VLSI Design</a></li>
+        <li><a href="courses.html" style="font-size:0.85rem;color:rgba(180,215,255,0.55);text-decoration:none;">Physical Design</a></li>
+        <li><a href="courses.html" style="font-size:0.85rem;color:rgba(180,215,255,0.55);text-decoration:none;">Verification</a></li>
+        <li><a href="courses.html" style="font-size:0.85rem;color:rgba(180,215,255,0.55);text-decoration:none;">Analog IC Design</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 style="font-family:'Rajdhani',sans-serif;font-size:1rem;font-weight:700;color:#fff;margin-bottom:18px;">Contact Us</h4>
+      <p style="font-size:0.83rem;color:rgba(180,215,255,0.55);margin-bottom:8px;">📍 Kengeri, Bangalore, KA 560060</p>
+      <p style="font-size:0.83rem;color:rgba(180,215,255,0.55);margin-bottom:8px;">📞 +91 98864 46024</p>
+      <p style="font-size:0.83rem;color:rgba(180,215,255,0.55);">✉️ <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="89e0e7efe6c9e7f1fdeee8fdecfaece4e0a7eae6e4">[email&#160;protected]</a></p>
+    </div>
+  </div>
+  <div style="border-top:1px solid rgba(0,198,255,0.08);padding:18px 40px;text-align:center;">
+    <p style="font-size:0.8rem;color:rgba(180,215,255,0.3);">© 2025 Nxt Gate Semi. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- FIREBASE -->
+<script type="module">
+  import { initializeApp }
+    from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
+  import { getFirestore, collection, addDoc, serverTimestamp }
+    from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey:            "AIzaSyAr_X9ZkASTRUzu1bQQ361V_87bs59s3yg",
+    authDomain:        "nxtgate-380d1.firebaseapp.com",
+    projectId:         "nxtgate-380d1",
+    storageBucket:     "nxtgate-380d1.firebasestorage.app",
+    messagingSenderId: "722921796587",
+    appId:             "1:722921796587:web:e09ead9f1bf1bde1601fae",
+    measurementId:     "G-Q2KHM0ZX8V"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db  = getFirestore(app);
+
+  function $(id) { return document.getElementById(id); }
+
+  function setLoading(on) {
+    $('submitBtn').disabled       = on;
+    $('btnText').style.display    = on ? 'none'  : 'inline';
+    $('btnSpinner').style.display = on ? 'block' : 'none';
+  }
+
+  function showToast(type, msg) {
+    $('toastSuccess').classList.remove('show');
+    $('toastError').classList.remove('show');
+    if (type === 'success') {
+      $('toastSuccess').classList.add('show');
+    } else {
+      $('errorMsg').textContent = msg || 'Something went wrong. Please try again.';
+      $('toastError').classList.add('show');
+    }
+  }
+
+  function validateField(id, ok, errId) {
+    $(id).classList.toggle('error', !ok);
+    $(errId).classList.toggle('show', !ok);
+    return ok;
+  }
+
+  async function handleSubmit() {
+    $('toastSuccess').classList.remove('show');
+    $('toastError').classList.remove('show');
+
+    const fname   = $('fname').value.trim();
+    const lname   = $('lname').value.trim();
+    const email   = $('email').value.trim();
+    const phone   = $('phone').value.trim();
+    const profile = $('profile').value;
+    const subject = $('subject').value;
+    const message = $('message').value.trim();
+
+    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    const v1 = validateField('fname',   fname.length > 0, 'fname-error');
+    const v2 = validateField('email',   emailOk,          'email-error');
+    const v3 = validateField('subject', subject !== '',    'subject-error');
+    if (!v1 || !v2 || !v3) return;
+
+    setLoading(true);
+    try {
+      await addDoc(collection(db, 'contact_submissions'), {
+        firstName:   fname,
+        lastName:    lname   || null,
+        email:       email,
+        phone:       phone   || null,
+        profile:     profile || null,
+        subject:     subject,
+        message:     message || null,
+        submittedAt: serverTimestamp(),
+        source:      'contact_page'
+      });
+
+      ['fname','lname','email','phone','message'].forEach(id => $(id).value = '');
+      $('profile').selectedIndex = 0;
+      $('subject').selectedIndex = 0;
+      showToast('success');
+    } catch (err) {
+      console.error('Firestore write failed:', err.code, err.message);
+      let msg = 'Failed to send. Please try again.';
+      if (err.code === 'permission-denied') {
+        msg = 'Server permission error — please contact us directly at info@nxtgatesemi.com';
+      } else if (err.code === 'unavailable') {
+        msg = 'You appear to be offline. Check your connection and try again.';
+      }
+      showToast('error', msg);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  // module scripts are deferred by spec — DOM is always ready here.
+  // Using window.addEventListener as an extra safety net.
+  function attachListener() {
+    const btn = $('submitBtn');
+    if (btn) {
+      btn.addEventListener('click', handleSubmit);
+    } else {
+      // Fallback: if somehow the button isn't in the DOM yet, wait for it
+      window.addEventListener('DOMContentLoaded', () => {
+        $('submitBtn').addEventListener('click', handleSubmit);
+      });
+    }
+  }
+  attachListener();
+</script>
+
+<script>
+  function toggleFaq(btn) {
+    const answer = btn.nextElementSibling;
+    const isOpen = answer.classList.contains('open');
+    document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('open'));
+    document.querySelectorAll('.faq-question').forEach(b => b.classList.remove('open'));
+    if (!isOpen) { answer.classList.add('open'); btn.classList.add('open'); }
+  }
+</script>
+
+
+<script>
+  /* Animated number counters */
+  function animateCounters() {
+    document.querySelectorAll('.stat-num').forEach(el => {
+      const target = parseFloat(el.dataset.target);
+      const isDecimal = target % 1 !== 0;
+      const duration = 1600;
+      const start = performance.now();
+      function update(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const ease = 1 - Math.pow(1 - progress, 3);
+        const current = target * ease;
+        el.textContent = isDecimal ? current.toFixed(1) : Math.floor(current);
+        if (progress < 1) requestAnimationFrame(update);
+        else el.textContent = isDecimal ? target.toFixed(1) : target;
+      }
+      requestAnimationFrame(update);
+    });
+  }
+
+  /* Trigger counters when stats section enters viewport */
+  const statsGrid = document.querySelector('.stats-grid');
+  if (statsGrid) {
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        animateCounters();
+        observer.disconnect();
+      }
+    }, { threshold: 0.3 });
+    observer.observe(statsGrid);
+  }
+</script>
+</body>
+</html>
