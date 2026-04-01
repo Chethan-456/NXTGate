@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Register — Nxt Gate Semi</title>
+  <title>Register — NxtGate Semiconductor</title>
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Exo+2:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -16,23 +16,47 @@
 
     /* NAV */
     nav {
-      background: #fff; border-bottom: 1px solid #e2eaf2;
-      padding: 14px 40px;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 40px;
+      background: rgba(2,12,27,0.95); backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0,198,255,0.12);
     }
-    .logo { display: flex; align-items: center; gap: 9px; text-decoration: none; }
-    .logo-icon { width: 32px; height: 32px; background: linear-gradient(135deg,#0077b6,#00c6ff); border-radius: 7px; display:flex; align-items:center; justify-content:center; font-size:15px; }
-    .logo-text { font-family:'Rajdhani',sans-serif; font-size:1.1rem; font-weight:700; color:#0d1f35; }
-    .nav-back { display:flex; align-items:center; gap:5px; color:#7a95b0; font-size:0.85rem; font-weight:500; text-decoration:none; transition:color 0.2s; }
-    .nav-back:hover { color:#0077b6; }
-    .nav-back svg { transition:transform 0.2s; }
-    .nav-back:hover svg { transform:translateX(-3px); }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo-img { height: 60px; width: auto; filter: brightness(0) invert(1); }
+    .nav-logo-name { font-family: 'Rajdhani', sans-serif; font-size: 1.3rem; font-weight: 700; color: #fff; letter-spacing: 0.5px; }
+    .nav-links { display: flex; align-items: center; gap: 30px; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: #00c6ff; }
+    .btn-enroll { background: linear-gradient(135deg,#0077b6,#00c6ff); color: #fff; border: none; padding: 9px 22px; border-radius: 6px; font-family: 'Exo 2',sans-serif; font-size: 0.88rem; font-weight: 600; cursor: pointer; transition: opacity 0.2s; }
+    .btn-enroll:hover { opacity: 0.85; }
+    .nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .nav-toggle span { width: 22px; height: 2px; background: #fff; border-radius: 2px; }
+
+    @media (max-width: 767px) {
+      nav { padding: 10px 18px; }
+      .nav-logo-img { height: 44px; }
+      .nav-logo-name { font-size: 1rem; }
+      .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(2,12,27,0.98); padding: 16px 20px; gap: 4px; border-bottom: 1px solid rgba(0,198,255,0.1); }
+      .nav-links.open { display: flex; }
+      .nav-links li { width: 100%; }
+      .nav-links a { display: block; padding: 10px 0; font-size: 0.95rem; }
+      .btn-enroll { display: none; }
+      .nav-toggle { display: flex; }
+    }
+    @media (min-width: 768px) and (max-width: 1023px) {
+      nav { padding: 10px 28px; }
+      .nav-logo-img { height: 52px; }
+    }
+    @media (min-width: 1280px) {
+      nav { padding: 10px 60px; }
+    }
 
     /* PAGE */
     .page {
       flex: 1;
       display: flex; align-items: center; justify-content: center;
-      padding: 48px 20px;
+      padding: 100px 20px 40px;
     }
 
     /* CARD */
@@ -40,40 +64,40 @@
       background: #fff;
       border: 1px solid #e2eaf2;
       border-radius: 16px;
-      width: 100%; max-width: 480px;
-      padding: 40px 40px 36px;
+      width: 100%; max-width: 520px;
+      padding: 28px 32px 24px;
       box-shadow: 0 4px 32px rgba(0,40,100,0.07);
     }
 
     /* HEADER */
     .card h1 {
       font-family: 'Rajdhani', sans-serif;
-      font-size: 1.75rem; font-weight: 700;
-      color: #0d1f35; margin-bottom: 4px;
+      font-size: 1.5rem; font-weight: 700;
+      color: #0d1f35; margin-bottom: 3px;
     }
     .card > p {
-      font-size: 0.875rem; color: #7a95b0;
-      margin-bottom: 28px; line-height: 1.5;
+      font-size: 0.8rem; color: #7a95b0;
+      margin-bottom: 14px; line-height: 1.4;
     }
-    .divider { height: 1px; background: #edf2f7; margin-bottom: 24px; }
+    .divider { height: 1px; background: #edf2f7; margin-bottom: 14px; }
 
     /* FIELDS */
-    .field { margin-bottom: 16px; }
+    .field { margin-bottom: 10px; }
     .field label {
       display: block;
-      font-size: 0.72rem; font-weight: 700;
+      font-size: 0.68rem; font-weight: 700;
       letter-spacing: 0.06em; text-transform: uppercase;
-      color: #9ab0c8; margin-bottom: 6px;
+      color: #9ab0c8; margin-bottom: 4px;
     }
     .field input, .field select {
       width: 100%;
       background: #f7f9fc;
       border: 1.5px solid #e2eaf2;
-      border-radius: 8px;
+      border-radius: 7px;
       color: #0d1f35;
       font-family: 'Exo 2', sans-serif;
-      font-size: 0.9rem;
-      padding: 11px 13px;
+      font-size: 0.85rem;
+      padding: 8px 11px;
       outline: none;
       transition: border-color 0.2s, background 0.2s;
       -webkit-appearance: none;
@@ -86,44 +110,46 @@
     .field select {
       cursor: pointer;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='%239ab0c8' d='M5 6L0 0h10z'/%3E%3C/svg%3E");
-      background-repeat: no-repeat; background-position: right 13px center;
-      background-color: #f7f9fc; padding-right: 34px;
+      background-repeat: no-repeat; background-position: right 11px center;
+      background-color: #f7f9fc; padding-right: 30px;
     }
     .field select option { background: #fff; color: #0d1f35; }
     .field.error input, .field.error select { border-color: #f87171; background: #fff8f8; }
-    .err { font-size: 0.71rem; color: #f87171; margin-top: 4px; display: none; }
+    .err { font-size: 0.68rem; color: #f87171; margin-top: 3px; display: none; }
     .field.error .err { display: block; }
 
-    .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .row3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
 
     /* COURSE CARDS */
     .course-label {
-      font-size: 0.72rem; font-weight: 700;
+      font-size: 0.68rem; font-weight: 700;
       letter-spacing: 0.06em; text-transform: uppercase;
-      color: #9ab0c8; margin-bottom: 8px; display: block;
+      color: #9ab0c8; margin-bottom: 6px; display: block;
     }
     .course-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 8px; margin-bottom: 16px;
+      display: grid; grid-template-columns: 1fr 1fr 1fr;
+      gap: 6px; margin-bottom: 12px;
     }
     .c-opt {
-      border: 1.5px solid #e2eaf2; border-radius: 9px;
-      padding: 11px 13px; cursor: pointer;
+      border: 1.5px solid #e2eaf2; border-radius: 8px;
+      padding: 10px 10px; cursor: pointer;
       transition: all 0.2s; position: relative;
     }
     .c-opt:hover { border-color: #a8c8e8; background: #f5f9ff; }
     .c-opt.sel { border-color: #0077b6; background: #f0f7ff; }
     .c-opt input { position: absolute; opacity: 0; pointer-events: none; }
     .c-name {
-      font-size: 0.82rem; font-weight: 700; color: #0d1f35;
-      display: flex; align-items: center; gap: 6px; margin-bottom: 2px;
+      font-size: 0.75rem; font-weight: 700; color: #0d1f35;
+      display: flex; align-items: center; gap: 5px; margin-bottom: 3px;
+      line-height: 1.3;
     }
     .c-name::before {
-      content: ''; width: 8px; height: 8px; border-radius: 50%;
+      content: ''; width: 7px; height: 7px; border-radius: 50%;
       border: 1.5px solid #c8d8e8; flex-shrink: 0; transition: all 0.2s;
     }
     .c-opt.sel .c-name::before { background: #0077b6; border-color: #0077b6; }
-    .c-meta { font-size: 0.71rem; color: #9ab0c8; padding-left: 14px; }
+    .c-meta { font-size: 0.65rem; color: #9ab0c8; padding-left: 12px; line-height: 1.3; }
 
     /* SUBMIT */
     .btn-submit {
@@ -131,12 +157,12 @@
       background: #0a2a4a;
       color: #fff;
       font-family: 'Exo 2', sans-serif;
-      font-size: 0.95rem; font-weight: 700;
-      padding: 13px;
+      font-size: 0.9rem; font-weight: 700;
+      padding: 11px;
       border-radius: 8px; border: none;
       cursor: pointer;
       transition: background 0.2s, opacity 0.2s;
-      margin-top: 4px;
+      margin-top: 2px;
       letter-spacing: 0.02em;
       display: flex; align-items: center; justify-content: center; gap: 8px;
     }
@@ -145,7 +171,7 @@
 
     /* Spinner */
     .spinner {
-      width: 16px; height: 16px;
+      width: 15px; height: 15px;
       border: 2px solid rgba(255,255,255,0.35);
       border-top-color: #fff;
       border-radius: 50%;
@@ -158,60 +184,70 @@
     .toast-error {
       display: none;
       align-items: center; gap: 10px;
-      margin-top: 12px; padding: 12px 16px;
+      margin-top: 10px; padding: 10px 14px;
       background: #fff0f0; border: 1px solid #f0b0b0;
-      border-radius: 9px; color: #c02020;
-      font-size: 0.83rem; font-weight: 600;
+      border-radius: 8px; color: #c02020;
+      font-size: 0.8rem; font-weight: 600;
       animation: fadeIn 0.3s ease;
     }
     .toast-error.show { display: flex; }
 
     /* SUCCESS */
-    .success { display: none; text-align: center; padding: 12px 0; }
+    .success { display: none; text-align: center; padding: 8px 0; }
     .success.show { display: block; animation: fadeIn 0.4s ease both; }
     @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
     .success-icon {
-      width: 60px; height: 60px; border-radius: 50%;
+      width: 56px; height: 56px; border-radius: 50%;
       background: #f0fdf8; border: 1.5px solid #86efac;
       display: flex; align-items: center; justify-content: center;
-      margin: 0 auto 16px;
+      margin: 0 auto 14px;
     }
-    .success h2 { font-family:'Rajdhani',sans-serif; font-size:1.55rem; font-weight:700; color:#0d1f35; margin-bottom:8px; }
-    .success p { font-size:0.875rem; color:#7a95b0; line-height:1.65; margin-bottom:20px; }
+    .success h2 { font-family:'Rajdhani',sans-serif; font-size:1.45rem; font-weight:700; color:#0d1f35; margin-bottom:7px; }
+    .success p { font-size:0.83rem; color:#7a95b0; line-height:1.6; margin-bottom:16px; }
     .ref-tag {
       display: inline-block;
       background: #f0f7ff; border: 1px solid #cce0f5;
-      border-radius: 6px; padding: 8px 18px;
-      font-size: 0.8rem; color: #0077b6; font-weight: 700;
-      letter-spacing: 0.05em; margin-bottom: 22px;
+      border-radius: 6px; padding: 7px 16px;
+      font-size: 0.78rem; color: #0077b6; font-weight: 700;
+      letter-spacing: 0.05em; margin-bottom: 18px;
     }
     .btn-home {
       display: inline-block; background: #0a2a4a; color: #fff;
-      font-family: 'Exo 2',sans-serif; font-size:0.88rem; font-weight:700;
-      padding: 12px 28px; border-radius: 8px; text-decoration: none;
+      font-family: 'Exo 2',sans-serif; font-size:0.85rem; font-weight:700;
+      padding: 11px 26px; border-radius: 8px; text-decoration: none;
       transition: background 0.2s;
     }
     .btn-home:hover { background: #0077b6; }
 
     @media (max-width: 520px) {
-      nav { padding: 12px 20px; }
-      .card { padding: 28px 20px 24px; }
+      .card { padding: 22px 18px 20px; }
       .row2 { grid-template-columns: 1fr; }
+      .row3 { grid-template-columns: 1fr 1fr; }
       .course-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
-<nav>
-  <a class="logo" href="assets/nxtgatelogo.jpeg">
-    <div class="logo-icon">💠</div>
-    <span class="logo-text">Nxt Gate Semi</span>
+<!-- NAV -->
+<nav id="mainNav">
+  <a class="nav-logo" href="index.html">
+    <img src="assets/nxtgatelogo1.png" alt="Nxt Gate Semi Logo" class="nav-logo-img">
+    <span class="nav-logo-name">NxtGate Semiconductor</span>
   </a>
-  <a class="nav-back" href="index.html">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
-    Back to Home
-  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="courses.html">Courses</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li>
+      <a href="register.html">
+        <button class="btn-enroll">Enroll Now</button>
+      </a>
+    </li>
+  </ul>
+  <div class="nav-toggle" id="navToggle" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
 </nav>
 
 <div class="page">
@@ -236,10 +272,17 @@
         </div>
       </div>
 
-      <div class="field" id="f-em">
-        <label>Email Address *</label>
-        <input type="email" id="i-em" placeholder="rahul@example.com">
-        <div class="err">Enter a valid email</div>
+      <div class="row3">
+        <div class="field" id="f-em" style="grid-column: span 2;">
+          <label>Email Address *</label>
+          <input type="email" id="i-em" placeholder="rahul@example.com">
+          <div class="err">Enter a valid email</div>
+        </div>
+        <div class="field" id="f-ag">
+          <label>Age *</label>
+          <input type="number" id="i-ag" placeholder="22" min="16" max="60">
+          <div class="err">16–60</div>
+        </div>
       </div>
 
       <div class="row2">
@@ -248,56 +291,39 @@
           <input type="tel" id="i-ph" placeholder="+91 98765 43210">
           <div class="err">Required</div>
         </div>
-        <div class="field" id="f-ag">
-          <label>Age *</label>
-          <input type="number" id="i-ag" placeholder="22" min="16" max="60">
-          <div class="err">Enter a valid age</div>
+        <div class="field" id="f-pr">
+          <label>Proficiency *</label>
+          <select id="i-pr">
+            <option value="" disabled selected>Select level</option>
+            <option>Beginner</option>
+            <option>Intermediate</option>
+            <option>Advanced</option>
+          </select>
+          <div class="err">Required</div>
         </div>
       </div>
 
-      <div class="field" id="f-pr">
-        <label>Type of Proficiency *</label>
-        <select id="i-pr">
-          <option value="" disabled selected>Select your level</option>
-          <option>Beginner — No prior experience</option>
-          <option>Intermediate — Some exposure to VLSI / Electronics</option>
-          <option>Advanced — Working experience in the field</option>
-        </select>
-        <div class="err">Required</div>
-      </div>
-
-      <span class="course-label">Course *</span>
+      <span class="course-label">Program *</span>
       <div class="course-grid" id="cGrid">
-        <div class="c-opt sel" data-course="VLSI Front-End Design">
+
+        <div class="c-opt sel" data-course="VLSI Internship">
           <input type="radio" name="course" checked>
-          <div class="c-name">VLSI Front-End</div>
-          <div class="c-meta">RTL · Verification · 6 mo</div>
+          <div class="c-name">VLSI Internship</div>
+          <div class="c-meta">Live Projects · 1–3 mo</div>
         </div>
-        <div class="c-opt" data-course="Physical Design">
+
+        <div class="c-opt" data-course="VLSI Project">
           <input type="radio" name="course">
-          <div class="c-name">VLSI Back-End</div>
-          <div class="c-meta">Physical Design · 4 mo</div>
+          <div class="c-name">VLSI Project</div>
+          <div class="c-meta">RTL to GDSII · 4–8 wks</div>
         </div>
-        <div class="c-opt" data-course="Design Verification (UVM)">
+
+        <div class="c-opt" data-course="VLSI Training & Placement">
           <input type="radio" name="course">
-          <div class="c-name">Design Verification</div>
-          <div class="c-meta">SystemVerilog · UVM · 5 mo</div>
+          <div class="c-name">Training &amp; Placement</div>
+          <div class="c-meta">End-to-end · 3–6 mo</div>
         </div>
-        <div class="c-opt" data-course="Analog IC Design">
-          <input type="radio" name="course">
-          <div class="c-name">Analog IC Design</div>
-          <div class="c-meta">CMOS · PLL · ADC · 6 mo</div>
-        </div>
-        <div class="c-opt" data-course="Static Timing Analysis">
-          <input type="radio" name="course">
-          <div class="c-name">Static Timing Analysis</div>
-          <div class="c-meta">STA · SDC · ECO · 3 mo</div>
-        </div>
-        <div class="c-opt" data-course="Digital Design Fundamentals">
-          <input type="radio" name="course">
-          <div class="c-name">Digital Design</div>
-          <div class="c-meta">Beginner-friendly · 2 mo</div>
-        </div>
+
       </div>
 
       <button class="btn-submit" id="submitBtn">
@@ -306,7 +332,7 @@
       </button>
 
       <div class="toast-error" id="toastError">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
         <span id="errMsg">Something went wrong. Please try again.</span>
       </div>
     </div>
@@ -314,7 +340,7 @@
     <!-- SUCCESS -->
     <div class="success" id="successBox">
       <div class="success-icon">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
       </div>
       <h2>Registration Received!</h2>
       <p>Thank you! Our admissions team will reach out to you within 24 hours to confirm your enrollment.</p>
@@ -326,19 +352,13 @@
   </div>
 </div>
 
-<!-- ══════════════════════════════════════
-     FIREBASE INTEGRATION
-══════════════════════════════════════ -->
+<!-- FIREBASE -->
 <script type="module">
-
 import { initializeApp }
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-
+  from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getFirestore, collection, addDoc, serverTimestamp }
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+  from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-
-/* Firebase Config */
 const firebaseConfig = {
   apiKey: "AIzaSyAr_X9ZkASTRUzu1bQQ361V_87bs59s3yg",
   authDomain: "nxtgate-380d1.firebaseapp.com",
@@ -352,155 +372,93 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db  = getFirestore(app);
 
-
-/* Helper */
 function $(id){ return document.getElementById(id); }
 
+let selectedCourse = 'VLSI Internship';
 
-/* Course Selection */
-let selectedCourse = 'VLSI Front-End Design';
-
-document.querySelectorAll('.c-opt').forEach(opt=>{
-  opt.addEventListener('click',()=>{
-    document.querySelectorAll('.c-opt').forEach(o=>o.classList.remove('sel'));
+document.querySelectorAll('.c-opt').forEach(opt => {
+  opt.addEventListener('click', () => {
+    document.querySelectorAll('.c-opt').forEach(o => o.classList.remove('sel'));
     opt.classList.add('sel');
     selectedCourse = opt.dataset.course;
   });
 });
 
-
-/* Clear errors while typing */
-document.querySelectorAll('input, select').forEach(el=>{
-  el.addEventListener('input',()=>el.closest('.field')?.classList.remove('error'));
-  el.addEventListener('change',()=>el.closest('.field')?.classList.remove('error'));
+document.querySelectorAll('input, select').forEach(el => {
+  el.addEventListener('input',  () => el.closest('.field')?.classList.remove('error'));
+  el.addEventListener('change', () => el.closest('.field')?.classList.remove('error'));
 });
 
-
-/* Loading state */
-function setLoading(on){
+function setLoading(on) {
   $('submitBtn').disabled = on;
-  $('btnText').style.display = on ? 'none':'inline';
-  $('btnSpinner').style.display = on ? 'block':'none';
+  $('btnText').style.display    = on ? 'none' : 'inline';
+  $('btnSpinner').style.display = on ? 'block' : 'none';
 }
 
-
-/* Error toast */
-function showError(msg){
+function showError(msg) {
   $('errMsg').textContent = msg;
   $('toastError').classList.add('show');
 }
+function hideError() { $('toastError').classList.remove('show'); }
 
-function hideError(){
-  $('toastError').classList.remove('show');
+function chk(fid, iid, fn) {
+  const field = $(fid), val = $(iid).value;
+  if (!fn(val)) { field.classList.add('error'); return false; }
+  field.classList.remove('error'); return true;
 }
 
-
-/* Validation helper */
-function chk(fid,iid,fn){
-  const field=$(fid);
-  const val=$(iid).value;
-
-  if(!fn(val)){
-    field.classList.add('error');
-    return false;
-  }
-
-  field.classList.remove('error');
-  return true;
-}
-
-
-/* Submit */
-async function handleSubmit(e){
-
-  if(e) e.preventDefault();
-
-  if($('submitBtn').disabled) return;
-
+async function handleSubmit(e) {
+  if (e) e.preventDefault();
+  if ($('submitBtn').disabled) return;
   hideError();
 
-  let ok=true;
-
-  ok = chk('f-fn','i-fn',v=>v.trim().length>0) && ok;
-  ok = chk('f-ln','i-ln',v=>v.trim().length>0) && ok;
-
-  ok = chk('f-em','i-em',
-  v=>/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) && ok;
-
-  /* Improved phone validation (India friendly) */
-  ok = chk('f-ph','i-ph',
-  v=>/^[6-9]\d{9}$/.test(v.replace(/\D/g,''))) && ok;
-
-  ok = chk('f-ag','i-ag',
-  v=>v>=16 && v<=60) && ok;
-
-  ok = chk('f-pr','i-pr',
-  v=>v!=='') && ok;
-
-  if(!ok) return;
+  let ok = true;
+  ok = chk('f-fn','i-fn', v => v.trim().length > 0) && ok;
+  ok = chk('f-ln','i-ln', v => v.trim().length > 0) && ok;
+  ok = chk('f-em','i-em', v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) && ok;
+  ok = chk('f-ph','i-ph', v => /^[6-9]\d{9}$/.test(v.replace(/\D/g,''))) && ok;
+  ok = chk('f-ag','i-ag', v => v >= 16 && v <= 60) && ok;
+  ok = chk('f-pr','i-pr', v => v !== '') && ok;
+  if (!ok) return;
 
   setLoading(true);
+  const ref = 'NGS-' + Date.now().toString().slice(-6);
 
-  const ref='NGS-'+Date.now().toString().slice(-6);
-
-  try{
-
-    await addDoc(collection(db,'registrations'),{
-
-      referenceId:ref,
-
-      firstName:$('i-fn').value.trim(),
-      lastName:$('i-ln').value.trim(),
-      email:$('i-em').value.trim(),
-      phone:$('i-ph').value.trim(),
-
-      age:Number($('i-ag').value),
-      proficiency:$('i-pr').value,
-      course:selectedCourse,
-
-      registeredAt:serverTimestamp(),
-      source:'register_page'
-
+  try {
+    await addDoc(collection(db, 'registrations'), {
+      referenceId: ref,
+      firstName:   $('i-fn').value.trim(),
+      lastName:    $('i-ln').value.trim(),
+      email:       $('i-em').value.trim(),
+      phone:       $('i-ph').value.trim(),
+      age:         Number($('i-ag').value),
+      proficiency: $('i-pr').value,
+      course:      selectedCourse,
+      registeredAt: serverTimestamp(),
+      source: 'register_page'
     });
 
-    $('refTag').textContent='Reference ID: '+ref;
-
-    $('formSection').style.display='none';
+    $('refTag').textContent = 'Reference ID: ' + ref;
+    $('formSection').style.display = 'none';
     $('successBox').classList.add('show');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 
-    window.scrollTo({
-      top:0,
-      behavior:'smooth'
-    });
-
-  }
-
-  catch(err){
-
-    console.error("Firestore Error:",err);
-
-    let msg='Submission failed. Please try again.';
-
-    if(err.code==='permission-denied')
-      msg='Database permission denied';
-
-    if(err.code==='unavailable')
-      msg='Network issue detected';
-
+  } catch(err) {
+    console.error("Firestore Error:", err);
+    let msg = 'Submission failed. Please try again.';
+    if (err.code === 'permission-denied') msg = 'Database permission denied';
+    if (err.code === 'unavailable')       msg = 'Network issue detected';
     showError(msg);
-
-  }
-
-  finally{
+  } finally {
     setLoading(false);
   }
-
 }
 
+$('submitBtn').addEventListener('click', handleSubmit);
 
-/* Button listener */
-$('submitBtn').addEventListener('click',handleSubmit);
-
+window.toggleNav = function() {
+  document.getElementById('navLinks').classList.toggle('open');
+};
 </script>
 
 </body>
