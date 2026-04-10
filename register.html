@@ -340,6 +340,71 @@
       .row3 { grid-template-columns: 1fr 1fr 1fr; }
       .course-grid { grid-template-columns: 1fr 1fr 1fr; }
     }
+
+    /* ═══════════════════════════════
+       HAMBURGER MENU
+    ═══════════════════════════════ */
+    .hamburger {
+      display: none;
+      flex-direction: column; justify-content: center; align-items: center;
+      gap: 5px; width: 40px; height: 40px;
+      background: transparent; border: none; cursor: pointer;
+      padding: 4px; border-radius: 6px; transition: background 0.2s;
+      flex-shrink: 0; z-index: 110;
+    }
+    .hamburger:hover { background: rgba(0,198,255,0.08); }
+    .hamburger span {
+      display: block; width: 22px; height: 2px;
+      background: #fff; border-radius: 2px;
+      transition: transform 0.3s ease, opacity 0.3s ease, width 0.3s ease;
+      transform-origin: center;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; width: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mobile-nav-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(1,5,14,0.55); z-index: 98;
+      opacity: 0; transition: opacity 0.3s ease;
+    }
+    .mobile-nav-overlay.visible { opacity: 1; }
+    .mobile-nav-drawer {
+      position: fixed; top: 0; right: 0;
+      width: min(280px, 80vw); height: 100%;
+      background: #010f22;
+      border-left: 1px solid rgba(0,198,255,0.1);
+      z-index: 99; transform: translateX(100%);
+      transition: transform 0.35s cubic-bezier(0.22,1,0.36,1);
+      padding: 100px 28px 40px;
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .mobile-nav-drawer.open { transform: translateX(0); }
+    .mobile-nav-drawer a {
+      display: block; color: rgba(180,215,255,0.75); text-decoration: none;
+      font-family: 'Exo 2', sans-serif; font-size: 1.05rem; font-weight: 500;
+      padding: 14px 0; border-bottom: 1px solid rgba(0,198,255,0.07);
+      transition: color 0.2s, padding-left 0.2s;
+    }
+    .mobile-nav-drawer a:last-of-type { border-bottom: none; }
+    .mobile-nav-drawer a:hover { color: #00c6ff; padding-left: 6px; }
+    .mobile-nav-drawer .mobile-enroll-btn {
+      margin-top: 24px;
+      background: linear-gradient(135deg, #0077b6, #00c6ff);
+      color: #fff; text-align: center; padding: 13px 22px;
+      border-radius: 8px; font-weight: 700; font-size: 0.95rem;
+      border-bottom: none; box-shadow: 0 4px 20px rgba(0,198,255,0.25);
+    }
+    .mobile-nav-drawer .mobile-enroll-btn:hover { padding-left: 0; opacity: 0.9; }
+    @media (max-width: 767px) {
+      .hamburger { display: flex; }
+      .mobile-nav-overlay { display: block; }
+      .nav-toggle { display: none !important; }
+    }
+    @media (min-width: 768px) {
+      .hamburger { display: none; }
+      .mobile-nav-drawer, .mobile-nav-overlay { display: none !important; }
+    }
+
   </style>
 </head>
 <body>
@@ -353,20 +418,27 @@
       <span class="nav-logo-tagline">Quality &bull; Trust &bull; Deliverability</span>
     </div>
   </a>
-  <ul class="nav-links" id="navLinks">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="courses.html">Courses</a></li>
-    <li><a href="contact.html">Contact</a></li>
-    <li>
-      <a href="register.html">
-        <button class="btn-enroll">Enroll Now</button>
-      </a>
-    </li>
-  </ul>
-  <div class="nav-toggle" id="navToggle" onclick="toggleNav()">
-    <span></span><span></span><span></span>
+  <div style="display:flex;align-items:center;gap:20px;">
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="courses.html">Courses</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="register.html"><button class="btn-enroll">Enroll Now</button></a></li>
+    </ul>
+    <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
+
+<!-- Mobile Nav Drawer -->
+<div class="mobile-nav-overlay" id="mobileOverlay"></div>
+<div class="mobile-nav-drawer" id="mobileDrawer">
+  <a href="index.html">Home</a>
+  <a href="courses.html">Courses</a>
+  <a href="contact.html">Contact</a>
+  <a href="register.html" class="mobile-enroll-btn">Enroll Now</a>
+</div>
 
 <div class="page">
   <div class="card">
@@ -574,9 +646,24 @@ async function handleSubmit(e) {
 
 $('submitBtn').addEventListener('click', handleSubmit);
 
-window.toggleNav = function() {
-  document.getElementById('navLinks').classList.toggle('open');
-};
+// Hamburger menu
+const hamburgerBtn = document.getElementById('hamburgerBtn');
+const mobileDrawer = document.getElementById('mobileDrawer');
+const mobileOverlay = document.getElementById('mobileOverlay');
+function openMenu() {
+  hamburgerBtn.classList.add('open'); hamburgerBtn.setAttribute('aria-expanded','true');
+  mobileDrawer.classList.add('open'); mobileOverlay.classList.add('visible');
+  document.body.style.overflow = 'hidden';
+}
+function closeMenu() {
+  hamburgerBtn.classList.remove('open'); hamburgerBtn.setAttribute('aria-expanded','false');
+  mobileDrawer.classList.remove('open'); mobileOverlay.classList.remove('visible');
+  document.body.style.overflow = '';
+}
+hamburgerBtn.addEventListener('click', () => { mobileDrawer.classList.contains('open') ? closeMenu() : openMenu(); });
+mobileOverlay.addEventListener('click', closeMenu);
+mobileDrawer.querySelectorAll('a').forEach(l => l.addEventListener('click', closeMenu));
+window.addEventListener('resize', () => { if(window.innerWidth>=768) closeMenu(); });
 </script>
 
 </body>
