@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0"/>
-  <title>Contact — NxtGate Semiconductor</title>
+  <title>Contact — NxtGate Semiconductors</title>
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Exo+2:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -19,7 +19,9 @@
     }
     .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
     .logo-img { height: 60px; width: auto; filter: brightness(0) invert(1); }
-    .logo-text { font-family: 'Rajdhani', sans-serif; font-size: 1.3rem; font-weight: 700; color: #fff; letter-spacing: 0.5px; }
+    .logo-text-wrap { display: flex; flex-direction: column; gap: 0px; }
+    .logo-text { font-family: 'Rajdhani', sans-serif; font-size: 1.3rem; font-weight: 700; color: #fff; letter-spacing: 0.5px; line-height: 1.2; }
+    .logo-tagline { font-family: 'Exo 2', sans-serif; font-size: 0.58rem; font-weight: 500; color: rgba(0,198,255,0.7); letter-spacing: 1.8px; text-transform: uppercase; line-height: 1; }
     .nav-links { display: flex; align-items: center; gap: 30px; list-style: none; }
     .nav-links a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
     .nav-links a:hover { color: #00c6ff; }
@@ -151,30 +153,119 @@
     .response-badge { display: flex; align-items: center; gap: 8px; background: #eef6ff; border: 1px solid #c8dff5; border-radius: 10px; padding: 12px 16px; font-size: 0.82rem; color: #4a7ab5; }
     .response-badge strong { color: #0077b6; }
 
-    /* ── RESPONSIVE ── */
-    @media (max-width: 767px) {
+    /* ── RESPONSIVE — full breakpoint ladder ── */
+
+    /* 320px extra-small */
+    @media (max-width: 374px) {
+      nav { padding: 8px 12px; }
+      .logo-img { height: 32px; }
+      .logo-text { font-size: 0.82rem; }
+      .logo-tagline { font-size: 0.44rem; letter-spacing: 1px; }
+      .nav-links { display: none; }
+      .page-header { padding: 80px 12px 44px; }
+      .contact-cards-section { padding: 28px 12px 0; }
+      .contact-cards-inner { grid-template-columns: 1fr; gap: 10px; }
+      .contact-info-card { padding: 18px 12px 14px; }
+      .contact-main { grid-template-columns: 1fr; gap: 22px; padding: 26px 12px 52px; }
+      .form-row { grid-template-columns: 1fr; }
+      .contact-form-box { padding: 22px 14px; }
+      .faq-section { padding: 44px 12px 52px; }
+      .social-row { flex-wrap: wrap; }
+      .wa-badge { display: none; }
+    }
+
+    /* 375–389px small phone */
+    @media (min-width: 375px) and (max-width: 389px) {
+      nav { padding: 8px 14px; }
+      .logo-img { height: 34px; }
+      .logo-text { font-size: 0.88rem; }
+      .logo-tagline { font-size: 0.48rem; }
+      .nav-links { display: none; }
+      .page-header { padding: 82px 14px 46px; }
+      .contact-cards-inner { grid-template-columns: 1fr 1fr; gap: 10px; }
+      .contact-main { grid-template-columns: 1fr; gap: 24px; padding: 28px 14px 54px; }
+      .form-row { grid-template-columns: 1fr; }
+      .contact-form-box { padding: 24px 16px; }
+      .wa-badge { display: none; }
+    }
+
+    /* 390–429px mid phone */
+    @media (min-width: 390px) and (max-width: 429px) {
+      nav { padding: 8px 16px; }
+      .logo-img { height: 36px; }
+      .logo-text { font-size: 0.9rem; }
+      .nav-links { display: none; }
+      .page-header { padding: 84px 16px 48px; }
+      .contact-cards-inner { grid-template-columns: 1fr 1fr; gap: 10px; }
+      .contact-main { grid-template-columns: 1fr; gap: 24px; padding: 28px 16px 56px; }
+      .form-row { grid-template-columns: 1fr; }
+      .contact-form-box { padding: 24px 16px; }
+      .wa-badge { display: none; }
+    }
+
+    /* 430–480px large phone */
+    @media (min-width: 430px) and (max-width: 480px) {
+      nav { padding: 10px 18px; }
+      .logo-img { height: 38px; }
+      .logo-text { font-size: 0.95rem; }
+      .nav-links { display: none; }
+      .page-header { padding: 86px 18px 50px; }
+      .contact-cards-inner { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .contact-main { grid-template-columns: 1fr; gap: 26px; padding: 30px 18px 58px; }
+      .form-row { grid-template-columns: 1fr; }
+      .contact-form-box { padding: 26px 18px; }
+      .wa-badge { display: none; }
+    }
+
+    /* 481–599px phablet */
+    @media (min-width: 481px) and (max-width: 599px) {
+      nav { padding: 10px 20px; }
+      .logo-img { height: 40px; }
+      .logo-text { font-size: 0.95rem; }
+      .nav-links { display: none; }
+      .page-header { padding: 88px 20px 52px; }
+      .contact-cards-inner { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .contact-main { grid-template-columns: 1fr; gap: 26px; padding: 30px 20px 60px; }
+      .form-row { grid-template-columns: 1fr; }
+      .contact-form-box { padding: 26px 18px; }
+      .wa-badge { display: none; }
+    }
+
+    /* 600–767px large phone landscape / small tablet */
+    @media (min-width: 600px) and (max-width: 767px) {
       nav { padding: 10px 18px; }
       .logo-img { height: 44px; }
       .logo-text { font-size: 1rem; }
-      .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(2,12,27,0.98); padding: 16px 20px; gap: 4px; border-bottom: 1px solid rgba(0,198,255,0.1); }
-      .nav-links.open { display: flex; }
-      .nav-links li { width: 100%; }
-      .nav-links a { display: block; padding: 10px 0; font-size: 0.95rem; }
-      .btn-enroll { display: none; }
-      .nav-toggle { display: flex; }
+      .nav-links { display: none; }
       .page-header { padding: 90px 20px 52px; }
       .contact-cards-section { padding: 36px 16px 0; }
       .contact-cards-inner { grid-template-columns: 1fr 1fr; gap: 12px; }
-      .contact-info-card { padding: 22px 16px 18px; }
       .contact-main { grid-template-columns: 1fr; gap: 28px; padding: 32px 16px 60px; }
-      .form-row { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr 1fr; }
       .contact-form-box { padding: 28px 20px; }
       .faq-section { padding: 52px 16px 60px; }
       .social-row { flex-wrap: wrap; }
       .wa-badge { display: none; }
     }
-    @media (min-width: 768px) and (max-width: 1023px) {
+
+    /* 768–899px tablet portrait */
+    @media (min-width: 768px) and (max-width: 899px) {
+      nav { padding: 12px 26px; }
+      .logo-img { height: 44px; }
+      .logo-text { font-size: 1.1rem; }
+      .logo-tagline { font-size: 0.54rem; }
+      .page-header { padding: 96px 28px 58px; }
+      .contact-cards-section { padding: 44px 24px 0; }
+      .contact-cards-inner { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+      .contact-main { grid-template-columns: 1fr; gap: 32px; padding: 36px 24px 66px; }
+      .form-row { grid-template-columns: 1fr 1fr; }
+      .faq-section { padding: 56px 24px 66px; }
+    }
+
+    /* 900–1023px tablet landscape / small laptop */
+    @media (min-width: 900px) and (max-width: 1023px) {
       nav { padding: 12px 28px; }
+      .logo-img { height: 46px; }
       .page-header { padding: 100px 32px 60px; }
       .contact-cards-section { padding: 48px 28px 0; }
       .contact-cards-inner { grid-template-columns: repeat(2, 1fr); gap: 16px; }
@@ -182,12 +273,45 @@
       .form-row { grid-template-columns: 1fr 1fr; }
       .faq-section { padding: 60px 28px 70px; }
     }
-    @media (min-width: 1024px) {
+
+    /* 1024–1279px standard laptop */
+    @media (min-width: 1024px) and (max-width: 1279px) {
+      nav { padding: 10px 36px; }
       .contact-cards-inner { grid-template-columns: repeat(4, 1fr); }
       .contact-main { grid-template-columns: 1fr 1.5fr; }
     }
-    @media (min-width: 1280px) {
-      nav { padding: 10px 60px; }
+
+    /* 1280–1439px large laptop */
+    @media (min-width: 1280px) and (max-width: 1439px) {
+      nav { padding: 10px 52px; }
+      .contact-cards-inner { grid-template-columns: repeat(4, 1fr); }
+      .contact-main { grid-template-columns: 1fr 1.5fr; }
+    }
+
+    /* 1440–1599px large desktop */
+    @media (min-width: 1440px) and (max-width: 1599px) {
+      nav { padding: 10px 64px; }
+    }
+
+    /* 1600–1919px wide desktop */
+    @media (min-width: 1600px) and (max-width: 1919px) {
+      nav { padding: 10px 80px; height: 74px; }
+      .logo-img { height: 50px; }
+      .logo-text { font-size: 1.35rem; }
+      .logo-tagline { font-size: 0.62rem; }
+    }
+
+    /* 1920px+ Full-HD / 2K / 4K */
+    @media (min-width: 1920px) {
+      nav { padding: 10px 100px; height: 78px; }
+      .logo-img { height: 54px; }
+      .logo-text { font-size: 1.45rem; }
+      .logo-tagline { font-size: 0.64rem; }
+    }
+    @media (min-width: 2560px) {
+      nav { padding: 10px 140px; height: 86px; }
+      .logo-img { height: 60px; }
+      .logo-text { font-size: 1.6rem; }
     }
   </style>
 </head>
@@ -196,8 +320,11 @@
 <!-- NAV -->
 <nav>
   <a class="logo" href="index.html">
-    <img src="assets/nxtgatelogo1.png" alt="Nxt Gate Semi Logo" class="logo-img">
-    <span class="logo-text">NxtGate Semiconductor</span>
+    <img src="assets/nxt.png" alt="Nxt Gate Semi Logo" class="logo-img">
+    <div class="logo-text-wrap">
+      <span class="logo-text">NxtGate Semiconductors</span>
+      <span class="logo-tagline">Quality &bull; Trust &bull; Deliverability</span>
+    </div>
   </a>
   <ul class="nav-links" id="navLinks">
     <li><a href="index.html">Home</a></li>
@@ -250,7 +377,7 @@
       </div>
       <div class="cic-title">Email Us</div>
       <div class="cic-detail">
-        <a href="mailto:contactus@nxtgatesemi.com">contactus@nxtgatesemi.com</a><br>
+        <a href="/cdn-cgi/l/email-protection#395a56574d585a4d4c4a7957414d5e584d5c4a5c5450175a5654"><span class="__cf_email__" data-cfemail="85e6eaebf1e4e6f1f0f6c5ebfdf1e2e4f1e0f6e0e8ecabe6eae8">[email&#160;protected]</span></a><br>
         <!--<a href="mailto:admissions@nxtgatesemi.com">contactus@nextgatesemi.com</a>-->
       </div>
     </div>
@@ -259,7 +386,7 @@
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
       </div>
       <div class="cic-title">Office Hours</div>
-      <div class="cic-detail">Mon – Fri: 9:00 AM – 6:00 PM<br>Sat: 10:00 AM – 4:00 PM</div>
+      <div class="cic-detail">Mon – Sat: 9:00 AM – 9:00 PM</div>
     </div>
   </div>
 </div>
@@ -282,18 +409,18 @@
     </div>
     <div class="info-item">
       <div class="info-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-      <div class="info-text"><label>Email</label><span><a href="mailto:contactus@nxtgatesemi.com">contactus@nxtgatesemi.com</a><br></div>
+      <div class="info-text"><label>Email</label><span><a href="/cdn-cgi/l/email-protection#197a76776d787a6d6c6a5977616d7e786d7c6a7c7470377a7674"><span class="__cf_email__" data-cfemail="9ffcf0f1ebfefcebeaecdff1e7ebf8feebfaecfaf2f6b1fcf0f2">[email&#160;protected]</span></a><br></div>
     </div>
     <div class="info-item">
       <div class="info-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-      <div class="info-text"><label>Office Hours</label><span>Mon – Fri: 9:00 AM – 6:00 PM<br>Sat: 10:00 AM – 4:00 PM</span></div>
+      <div class="info-text"><label>Office Hours</label><span>Mon – Sat: 9:00 AM – 9:00 PM</span></div>
     </div>
 
     <div class="map-box">
       <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.9175!2d77.4833!3d12.9088!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae3f0a3b0b0001%3A0x1!2sKengeri%2C%20Bengaluru%2C%20Karnataka%20560060!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
 
-    <div class="social-row">
+    <!--<div class="social-row">
       <a href="#" class="social-btn">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
         LinkedIn
@@ -306,7 +433,7 @@
         <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-1.96C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.4 19.54C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58zM9.75 15.02V8.98L15.5 12z"/></svg>
         YouTube
       </a>
-    </div>
+    </div>-->
   </div>
 
   <!-- Right: Visual Panel -->
@@ -398,8 +525,8 @@
   <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1.6fr 1fr 1fr 1.4fr;gap:48px;padding-bottom:48px;">
     <div>
       <a href="index.html" style="display:flex;align-items:center;gap:10px;text-decoration:none;margin-bottom:14px;">
-        <img src="assets/nxtgatelogo1.png" alt="Nxt Gate Semi" style="height:48px;width:auto;filter:brightness(0) invert(1);">
-        <span style="font-family:'Rajdhani',sans-serif;font-size:1.2rem;font-weight:700;color:#fff;letter-spacing:0.5px;">Nxt Gate Semi</span>
+        <img src="assets/nxt.png" alt="NxtGate Semiconductor" style="height:48px;width:auto;filter:brightness(0) invert(1);">
+        <span style="font-family:'Rajdhani',sans-serif;font-size:1.2rem;font-weight:700;color:#fff;letter-spacing:0.5px;">NxtGate Semiconductors</span>
       </a>
       <p style="font-size:0.82rem;color:rgba(180,215,255,0.5);line-height:1.7;max-width:210px;margin-bottom:20px;">Leading the way in VLSI and semiconductor training with industry-focused curriculum and expert instructors.</p>
     </div>
@@ -414,25 +541,25 @@
     <div>
       <h4 style="font-family:'Rajdhani',sans-serif;font-size:1rem;font-weight:700;color:#fff;margin-bottom:18px;">Popular Courses</h4>
       <ul style="list-style:none;display:flex;flex-direction:column;gap:11px;">
-        <li><a href="courses.html" style="font-size:0.85rem;color:rgba(180,215,255,0.55);text-decoration:none;">VLSI Design</a></li>
-        <li><a href="courses.html" style="font-size:0.85rem;color:rgba(180,215,255,0.55);text-decoration:none;">Physical Design</a></li>
-        <li><a href="courses.html" style="font-size:0.85rem;color:rgba(180,215,255,0.55);text-decoration:none;">Verification</a></li>
-        <li><a href="courses.html" style="font-size:0.85rem;color:rgba(180,215,255,0.55);text-decoration:none;">Analog IC Design</a></li>
+        <li><a href="courses.html" style="font-size:0.85rem;color:rgba(180,215,255,0.55);text-decoration:none;">VVLSI Internship</a></li>
+        <li><a href="courses.html" style="font-size:0.85rem;color:rgba(180,215,255,0.55);text-decoration:none;">VLSI Project</a></li>
+        <li><a href="courses.html" style="font-size:0.85rem;color:rgba(180,215,255,0.55);text-decoration:none;">Training & Placement</a></li>
+       <!--- <li><a href="courses.html" style="font-size:0.85rem;color:rgba(180,215,255,0.55);text-decoration:none;">Analog IC Design</a></li>-->
       </ul>
     </div>
     <div>
       <h4 style="font-family:'Rajdhani',sans-serif;font-size:1rem;font-weight:700;color:#fff;margin-bottom:18px;">Contact Us</h4>
       <p style="font-size:0.83rem;color:rgba(180,215,255,0.55);margin-bottom:8px;">📍 Kengeri, Bangalore, KA 560060</p>
       <p style="font-size:0.83rem;color:rgba(180,215,255,0.55);margin-bottom:8px;">📞 +91 9742529364</p>
-      <p style="font-size:0.83rem;color:rgba(180,215,255,0.55);">✉️ contactus@nextgatesemi.com</p>
+      <p style="font-size:0.83rem;color:rgba(180,215,255,0.55);">✉️ <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f6959998829795828385b698938e829197829385939b9fd895999b">[email&#160;protected]</a></p>
     </div>
   </div>
   <div style="border-top:1px solid rgba(0,198,255,0.08);padding:18px 40px;text-align:center;">
-    <p style="font-size:0.8rem;color:rgba(180,215,255,0.3);">© 2025 NxtGate Semiconductor. All rights reserved.</p>
+    <p style="font-size:0.8rem;color:rgba(180,215,255,0.3);">© 2025 NxtGate Semiconductors. All rights reserved.</p>
   </div>
 </footer>
 
-<script type="module">
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
   import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
 
@@ -524,10 +651,9 @@
           function update(now) {
             const elapsed = now - start;
             const progress = Math.min(elapsed / duration, 1);
-            const ease = 1 - Math.pow(1 - progress, 3);
-            el.textContent = isDecimal ? (target * ease).toFixed(1) : Math.floor(target * ease);
+            el.textContent = isDecimal ? (target * progress).toFixed(1) :
+              Math.floor(target * progress);
             if (progress < 1) requestAnimationFrame(update);
-            else el.textContent = isDecimal ? target.toFixed(1) : target;
           }
           requestAnimationFrame(update);
         });

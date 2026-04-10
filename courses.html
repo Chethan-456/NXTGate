@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0"/>
-  <title>Courses — NxtGate Semiconductor</title>
+  <title>Courses — NxtGate Semiconductors</title>
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Exo+2:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -19,7 +19,9 @@
     }
     .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
     .nav-logo-img { height: 60px; width: auto; filter: brightness(0) invert(1); }
-    .nav-logo-name { font-family: 'Rajdhani', sans-serif; font-size: 1.3rem; font-weight: 700; color: #fff; letter-spacing: 0.5px; }
+    .nav-logo-text-wrap { display: flex; flex-direction: column; gap: 0px; }
+    .nav-logo-name { font-family: 'Rajdhani', sans-serif; font-size: 1.3rem; font-weight: 700; color: #fff; letter-spacing: 0.5px; line-height: 1.2; }
+    .nav-logo-tagline { font-family: 'Exo 2', sans-serif; font-size: 0.58rem; font-weight: 500; color: rgba(0,198,255,0.7); letter-spacing: 1.8px; text-transform: uppercase; line-height: 1; }
     .nav-links { display: flex; align-items: center; gap: 30px; list-style: none; }
     .nav-links a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
     .nav-links a:hover, .nav-links a.active { color: #00c6ff; }
@@ -388,55 +390,191 @@
     }
     .btn-modal-close:hover { border-color: #0077b6; color: #0077b6; }
 
-    /* ── RESPONSIVE ── */
-    @media (max-width: 767px) {
-      nav { padding: 10px 18px; }
-      .nav-logo-img { height: 44px; }
-      .nav-logo-name { font-size: 1rem; }
-      .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(2,12,27,0.98); padding: 16px 20px; gap: 4px; border-bottom: 1px solid rgba(0,198,255,0.1); }
-      .nav-links.open { display: flex; }
-      .nav-links li { width: 100%; }
-      .nav-links a { display: block; padding: 10px 0; font-size: 0.95rem; }
-      .btn-enroll { display: none; }
-      .nav-toggle { display: flex; }
-      .page-header { padding: 90px 20px 40px; }
-      .filter-bar { padding: 0 16px; top: 58px; }
-      .filter-btn { padding: 14px 14px; font-size: 0.8rem; }
-      .courses-page { padding: 28px 16px 60px; }
-      .courses-grid-full { grid-template-columns: 1fr; gap: 18px; }
-      .course-thumb-full { height: 160px; }
-      .course-body-full { padding: 18px 18px 0; }
-      .course-footer-full { padding: 14px 18px 18px; flex-direction: column; }
+    /* ── RESPONSIVE — full breakpoint ladder ── */
+
+    /* 320px extra-small */
+    @media (max-width: 374px) {
+      nav { padding: 6px 12px; }
+      .nav-logo-img { height: 32px; }
+      .nav-logo-name { font-size: 0.82rem; }
+      .nav-logo-tagline { font-size: 0.46rem; letter-spacing: 1px; }
+      .nav-links { display: none; }
+      .page-header { padding: 80px 12px 36px; }
+      .filter-bar { padding: 0 12px; top: 54px; }
+      .filter-btn { padding: 12px 10px; font-size: 0.75rem; }
+      .courses-page { padding: 24px 12px 52px; }
+      .courses-grid-full { grid-template-columns: 1fr; gap: 14px; }
+      .course-thumb-full { height: 140px; }
+      .course-body-full { padding: 14px 14px 0; }
+      .course-footer-full { padding: 12px 14px 14px; flex-direction: column; }
       .btn-enroll-card, .btn-details-card { flex: none; width: 100%; }
-      .included-section { padding: 48px 16px 56px; }
-      .included-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-      .included-card { padding: 22px 14px 18px; }
-      .included-title { font-size: 1.25rem; margin-bottom: 28px; }
-      .modal-content { padding: 20px 20px 28px; }
+      .included-section { padding: 40px 12px 48px; }
+      .included-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+      .included-card { padding: 18px 12px 14px; }
+      .included-title { font-size: 1.1rem; margin-bottom: 22px; }
+      .modal-content { padding: 16px 16px 22px; }
       .modal-stats { flex-direction: column; }
       .modal-stat { border-right: none; border-bottom: 1px solid #e4ecf4; }
       .modal-stat:last-child { border-bottom: none; }
       .modal-footer-cta { flex-direction: column; }
       .btn-modal-enroll, .btn-modal-close { flex: none; width: 100%; }
     }
-    @media (min-width: 768px) and (max-width: 1023px) {
+
+    /* 375–389px small phone */
+    @media (min-width: 375px) and (max-width: 389px) {
+      nav { padding: 8px 14px; }
+      .nav-logo-img { height: 34px; }
+      .nav-logo-name { font-size: 0.88rem; }
+      .nav-logo-tagline { font-size: 0.48rem; }
+      .nav-links { display: none; }
+      .page-header { padding: 84px 14px 38px; }
+      .courses-grid-full { grid-template-columns: 1fr; gap: 16px; }
+      .course-footer-full { flex-direction: column; }
+      .btn-enroll-card, .btn-details-card { flex: none; width: 100%; }
+      .included-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+      .modal-stats { flex-direction: column; }
+      .modal-footer-cta { flex-direction: column; }
+      .btn-modal-enroll, .btn-modal-close { flex: none; width: 100%; }
+    }
+
+    /* 390–429px mid phone */
+    @media (min-width: 390px) and (max-width: 429px) {
+      nav { padding: 8px 16px; }
+      .nav-logo-img { height: 36px; }
+      .nav-logo-name { font-size: 0.9rem; }
+      .nav-links { display: none; }
+      .page-header { padding: 86px 16px 40px; }
+      .courses-grid-full { grid-template-columns: 1fr; gap: 16px; }
+      .course-footer-full { flex-direction: column; }
+      .btn-enroll-card, .btn-details-card { flex: none; width: 100%; }
+      .included-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .modal-stats { flex-direction: column; }
+      .modal-footer-cta { flex-direction: column; }
+      .btn-modal-enroll, .btn-modal-close { flex: none; width: 100%; }
+    }
+
+    /* 430–480px large phone */
+    @media (min-width: 430px) and (max-width: 480px) {
+      nav { padding: 8px 18px; }
+      .nav-logo-img { height: 38px; }
+      .nav-logo-name { font-size: 0.95rem; }
+      .nav-links { display: none; }
+      .page-header { padding: 88px 18px 42px; }
+      .courses-grid-full { grid-template-columns: 1fr; gap: 16px; }
+      .course-footer-full { flex-direction: column; }
+      .btn-enroll-card, .btn-details-card { flex: none; width: 100%; }
+      .included-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .modal-stats { flex-direction: column; }
+      .modal-footer-cta { flex-direction: column; }
+      .btn-modal-enroll, .btn-modal-close { flex: none; width: 100%; }
+    }
+
+    /* 481–599px phablet / large phone landscape */
+    @media (min-width: 481px) and (max-width: 599px) {
+      nav { padding: 10px 20px; }
+      .nav-logo-img { height: 40px; }
+      .nav-logo-name { font-size: 0.95rem; }
+      .nav-links { display: none; }
+      .page-header { padding: 90px 20px 44px; }
+      .filter-bar { padding: 0 16px; top: 58px; }
+      .courses-page { padding: 28px 16px 60px; }
+      .courses-grid-full { grid-template-columns: 1fr; gap: 18px; }
+      .course-footer-full { flex-direction: column; }
+      .btn-enroll-card, .btn-details-card { flex: none; width: 100%; }
+      .included-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .modal-stats { flex-direction: column; }
+      .modal-footer-cta { flex-direction: column; }
+      .btn-modal-enroll, .btn-modal-close { flex: none; width: 100%; }
+    }
+
+    /* 600–767px large phone landscape / small tablet */
+    @media (min-width: 600px) and (max-width: 767px) {
+      nav { padding: 10px 18px; }
+      .nav-logo-img { height: 42px; }
+      .nav-logo-name { font-size: 1rem; }
+      .nav-links { display: none; }
+      .page-header { padding: 92px 20px 46px; }
+      .filter-bar { padding: 0 18px; top: 60px; }
+      .courses-page { padding: 30px 18px 64px; }
+      .courses-grid-full { grid-template-columns: 1fr 1fr; gap: 18px; }
+      .course-thumb-full { height: 150px; }
+      .course-footer-full { padding: 12px 16px 16px; flex-direction: column; }
+      .btn-enroll-card, .btn-details-card { flex: none; width: 100%; }
+      .included-section { padding: 44px 18px 52px; }
+      .included-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .modal-stats { flex-direction: column; }
+      .modal-footer-cta { flex-direction: column; }
+      .btn-modal-enroll, .btn-modal-close { flex: none; width: 100%; }
+    }
+
+    /* 768–899px tablet portrait */
+    @media (min-width: 768px) and (max-width: 899px) {
+      nav { padding: 10px 26px; }
+      .nav-logo-img { height: 44px; }
+      .nav-logo-name { font-size: 1.1rem; }
+      .nav-logo-tagline { font-size: 0.55rem; }
+      .page-header { padding: 96px 28px 50px; }
+      .filter-bar { padding: 0 24px; }
+      .courses-page { padding: 32px 24px 66px; }
+      .courses-grid-full { grid-template-columns: 1fr 1fr; gap: 20px; }
+      .included-section { padding: 52px 24px 60px; }
+      .included-grid { grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    }
+
+    /* 900–1023px tablet landscape / small laptop */
+    @media (min-width: 900px) and (max-width: 1023px) {
       nav { padding: 10px 28px; }
-      .nav-logo-img { height: 52px; }
-      .page-header { padding: 100px 32px 48px; }
+      .nav-logo-img { height: 46px; }
+      .page-header { padding: 100px 32px 54px; }
       .filter-bar { padding: 0 28px; }
       .courses-page { padding: 36px 28px 70px; }
       .courses-grid-full { grid-template-columns: 1fr 1fr; gap: 20px; }
       .included-section { padding: 56px 28px 64px; }
       .included-grid { grid-template-columns: repeat(4, 1fr); gap: 14px; }
     }
-    @media (min-width: 1024px) {
+
+    /* 1024–1279px standard laptop */
+    @media (min-width: 1024px) and (max-width: 1279px) {
+      nav { padding: 10px 36px; }
       .courses-grid-full { grid-template-columns: repeat(3, 1fr); }
       .included-grid { grid-template-columns: repeat(4, 1fr); }
     }
-    @media (min-width: 1280px) {
-      nav { padding: 10px 60px; }
+
+    /* 1280–1439px large laptop / desktop */
+    @media (min-width: 1280px) and (max-width: 1439px) {
+      nav { padding: 10px 52px; }
+      .courses-page { padding: 48px 36px 80px; }
+      .included-section { padding: 68px 36px 76px; }
+    }
+
+    /* 1440–1599px large desktop */
+    @media (min-width: 1440px) and (max-width: 1599px) {
+      nav { padding: 10px 64px; }
       .courses-page { padding: 48px 40px 80px; }
       .included-section { padding: 72px 40px 80px; }
+    }
+
+    /* 1600–1919px wide desktop */
+    @media (min-width: 1600px) and (max-width: 1919px) {
+      nav { padding: 10px 80px; height: 74px; }
+      .nav-logo-img { height: 50px; }
+      .nav-logo-name { font-size: 1.35rem; }
+      .nav-logo-tagline { font-size: 0.62rem; }
+      .courses-page { padding: 52px 60px 90px; }
+    }
+
+    /* 1920px+ Full-HD / 2K / 4K */
+    @media (min-width: 1920px) {
+      nav { padding: 10px 100px; height: 78px; }
+      .nav-logo-img { height: 54px; }
+      .nav-logo-name { font-size: 1.45rem; }
+      .nav-logo-tagline { font-size: 0.64rem; }
+      .courses-page { padding: 56px 80px 100px; }
+    }
+    @media (min-width: 2560px) {
+      nav { padding: 10px 140px; height: 86px; }
+      .nav-logo-img { height: 60px; }
+      .nav-logo-name { font-size: 1.6rem; }
     }
   </style>
 </head>
@@ -445,8 +583,11 @@
 <!-- NAV -->
 <nav id="mainNav">
   <a class="nav-logo" href="index.html">
-    <img src="assets/nxtgatelogo1.png" alt="Nxt Gate Semi Logo" class="nav-logo-img">
-    <span class="nav-logo-name">NxtGate Semiconductor</span>
+    <img src="assets/nxt.png" alt="Nxt Gate Semi Logo" class="nav-logo-img">
+    <div class="nav-logo-text-wrap">
+      <span class="nav-logo-name">NxtGate Semiconductors</span>
+      <span class="nav-logo-tagline">Quality &bull; Trust &bull; Deliverability</span>
+    </div>
   </a>
   <ul class="nav-links" id="navLinks">
     <li><a href="index.html">Home</a></li>
@@ -811,8 +952,8 @@
   <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1.6fr 1fr 1fr 1.4fr;gap:48px;padding-bottom:48px;">
     <div>
       <a href="index.html" style="display:flex;align-items:center;gap:10px;text-decoration:none;margin-bottom:14px;">
-        <img src="assets/nxtgatelogo1.png" alt="Nxt Gate Semi Logo" style="height:40px;width:auto;filter:brightness(0) invert(1);">
-        <span style="font-family:'Rajdhani',sans-serif;font-size:1.1rem;font-weight:700;color:#fff;">NxtGate Semiconductor</span>
+        <img src="assets/nxt.png" alt="NxtGate Semiconductors Logo" style="height:40px;width:auto;filter:brightness(0) invert(1);">
+        <span style="font-family:'Rajdhani',sans-serif;font-size:1.1rem;font-weight:700;color:#fff;">NxtGate Semiconductors</span>
       </a>
       <p style="font-size:0.82rem;color:rgba(180,215,255,0.5);line-height:1.7;max-width:210px;margin-bottom:20px;">Leading the way in VLSI and semiconductor training with industry-focused curriculum and expert instructors.</p>
     </div>
@@ -820,7 +961,7 @@
       <h4 style="font-family:'Rajdhani',sans-serif;font-size:1rem;font-weight:700;color:#fff;margin-bottom:18px;">Quick Links</h4>
       <ul style="list-style:none;display:flex;flex-direction:column;gap:11px;">
         <li><a href="index.html" style="font-size:0.85rem;color:rgba(180,215,255,0.55);text-decoration:none;">Home</a></li>
-        <li><a href="courses.html" style="font-size:0.85rem;color:#00c6ff;text-decoration:none;">Programs</a></li>
+        <li><a href="courses.html" style="font-size:0.85rem;color:#00c6ff;text-decoration:none;">Courses</a></li>
         <li><a href="contact.html" style="font-size:0.85rem;color:rgba(180,215,255,0.55);text-decoration:none;">Contact</a></li>
       </ul>
     </div>
@@ -836,7 +977,7 @@
       <h4 style="font-family:'Rajdhani',sans-serif;font-size:1rem;font-weight:700;color:#fff;margin-bottom:18px;">Contact Us</h4>
       <p style="font-size:0.83rem;color:rgba(180,215,255,0.55);margin-bottom:8px;">📍 Kengeri, Bangalore, KA 560060</p>
       <p style="font-size:0.83rem;color:rgba(180,215,255,0.55);margin-bottom:8px;">📞 +91 9742529364</p>
-      <p style="font-size:0.83rem;color:rgba(180,215,255,0.55);">✉️ contactus@nextgatesemi.com</p>
+      <p style="font-size:0.83rem;color:rgba(180,215,255,0.55);">✉️ <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b7d4d8d9c3d6d4c3c2c4f7d9d2cfc3d0d6c3d2c4d2dade99d4d8da">[email&#160;protected]</a></p>
     </div>
   </div>
   <div style="border-top:1px solid rgba(0,198,255,0.08);padding:18px 40px;text-align:center;">
@@ -852,7 +993,7 @@
   </div>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   /* ── Nav toggle ── */
   function toggleNav() {
     document.getElementById('navLinks').classList.toggle('open');
@@ -1029,14 +1170,11 @@
     document.body.style.overflow = '';
   }
 
-  function handleOverlayClick(e) {
-    if (e.target === document.getElementById('modalOverlay')) closeModal();
+  function handleOverlayClick(event) {
+    if (event.target.id === 'modalOverlay') {
+      closeModal();
+    }
   }
-
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') closeModal();
-  });
 </script>
-
 </body>
 </html>
