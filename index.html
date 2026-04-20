@@ -147,8 +147,12 @@
       z-index: 98;
       opacity: 0;
       transition: opacity 0.3s ease;
+      pointer-events: none;
     }
-    .mobile-nav-overlay.visible { opacity: 1; }
+    .mobile-nav-overlay.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
 
     .mobile-nav-drawer {
       position: fixed;
@@ -165,8 +169,9 @@
       display: flex;
       flex-direction: column;
       gap: 6px;
+      pointer-events: none;
     }
-    .mobile-nav-drawer.open { transform: translateX(0); }
+    .mobile-nav-drawer.open { transform: translateX(0); pointer-events: auto; }
     .mobile-nav-drawer a {
       display: block;
       color: rgba(180,215,255,0.75);
@@ -360,6 +365,7 @@
       box-shadow: 0 4px 24px rgba(0,198,255,0.3);
       transition: transform 0.2s, box-shadow 0.2s;
       letter-spacing: 0.1px;
+      -webkit-tap-highlight-color: transparent;
     }
     .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,198,255,0.45); }
     .btn-secondary {
@@ -371,6 +377,7 @@
       border: 1.5px solid rgba(255,255,255,0.28);
       cursor: pointer;
       transition: background 0.2s, border-color 0.2s, transform 0.2s;
+      -webkit-tap-highlight-color: transparent;
     }
     .btn-secondary:hover {
       background: rgba(255,255,255,0.07);
@@ -502,6 +509,7 @@
       padding: 10px 16px; border-radius: 7px; border: none;
       cursor: pointer; text-align: center; text-decoration: none; display: block;
       transition: background 0.2s;
+      -webkit-tap-highlight-color: transparent;
     }
     .btn-enroll-card:hover { background: #0077b6; }
     .btn-details-card {
@@ -511,6 +519,7 @@
       border: 1.5px solid #ccd8e8; cursor: pointer; text-align: center;
       text-decoration: none; display: block;
       transition: border-color 0.2s, color 0.2s;
+      -webkit-tap-highlight-color: transparent;
     }
     .btn-details-card:hover { border-color: #0077b6; color: #0077b6; }
     .courses-cta-row { text-align: center; margin-top: 36px; }
@@ -519,6 +528,7 @@
       font-family: 'Exo 2', sans-serif; font-size: 0.9rem; font-weight: 700;
       color: #0077b6; text-decoration: none; padding: 11px 28px;
       border-radius: 8px; border: 1.5px solid #0077b6; transition: background 0.2s, color 0.2s;
+      -webkit-tap-highlight-color: transparent;
     }
     .btn-view-all:hover { background: #0077b6; color: #fff; }
 
@@ -621,9 +631,9 @@
     .cta-section h2 { font-family: 'Exo 2', sans-serif; font-size: clamp(1.8rem, 4.5vw, 2.7rem); font-weight: 800; color: #fff; line-height: 1.2; margin-bottom: 16px; letter-spacing: -0.015em; }
     .cta-section p { font-size: 0.98rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 40px; max-width: 450px; margin-left: auto; margin-right: auto; }
     .cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
-    .cta-btn-enroll { display: inline-flex; align-items: center; background: linear-gradient(135deg, #0088cc, #00c6ff); color: #fff; font-family: 'Exo 2', sans-serif; font-size: 0.94rem; font-weight: 700; padding: 13px 32px; border-radius: 8px; border: none; cursor: pointer; text-decoration: none; box-shadow: 0 4px 22px rgba(0,198,255,0.32); transition: transform 0.2s, box-shadow 0.2s; }
+    .cta-btn-enroll { display: inline-flex; align-items: center; background: linear-gradient(135deg, #0088cc, #00c6ff); color: #fff; font-family: 'Exo 2', sans-serif; font-size: 0.94rem; font-weight: 700; padding: 13px 32px; border-radius: 8px; border: none; cursor: pointer; text-decoration: none; box-shadow: 0 4px 22px rgba(0,198,255,0.32); transition: transform 0.2s, box-shadow 0.2s; -webkit-tap-highlight-color: transparent; }
     .cta-btn-enroll:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,198,255,0.48); }
-    .cta-btn-advisor { display: inline-flex; align-items: center; background: transparent; color: #fff; font-family: 'Exo 2', sans-serif; font-size: 0.94rem; font-weight: 600; padding: 13px 32px; border-radius: 8px; border: 1.5px solid rgba(255,255,255,0.35); cursor: pointer; text-decoration: none; transition: background 0.2s, border-color 0.2s, transform 0.2s; }
+    .cta-btn-advisor { display: inline-flex; align-items: center; background: transparent; color: #fff; font-family: 'Exo 2', sans-serif; font-size: 0.94rem; font-weight: 600; padding: 13px 32px; border-radius: 8px; border: 1.5px solid rgba(255,255,255,0.35); cursor: pointer; text-decoration: none; transition: background 0.2s, border-color 0.2s, transform 0.2s; -webkit-tap-highlight-color: transparent; }
     .cta-btn-advisor:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.65); transform: translateY(-2px); }
 
     /* ═══════════════════════════════

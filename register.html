@@ -30,7 +30,7 @@
     .nav-links { display: flex; align-items: center; gap: 30px; list-style: none; }
     .nav-links a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
     .nav-links a:hover, .nav-links a.active { color: #00c6ff; }
-    .btn-enroll { background: linear-gradient(135deg,#0077b6,#00c6ff); color: #fff; border: none; padding: 9px 22px; border-radius: 6px; font-family: 'Exo 2',sans-serif; font-size: 0.88rem; font-weight: 600; cursor: pointer; transition: opacity 0.2s; }
+    .btn-enroll { background: linear-gradient(135deg,#0077b6,#00c6ff); color: #fff; border: none; padding: 9px 22px; border-radius: 6px; font-family: 'Exo 2',sans-serif; font-size: 0.88rem; font-weight: 600; cursor: pointer; transition: opacity 0.2s; text-decoration: none; display: inline-block; }
     .btn-enroll:hover { opacity: 0.85; }
     .nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
     .nav-toggle span { width: 22px; height: 2px; background: #fff; border-radius: 2px; }
@@ -366,8 +366,9 @@
       display: none; position: fixed; inset: 0;
       background: rgba(1,5,14,0.55); z-index: 98;
       opacity: 0; transition: opacity 0.3s ease;
+      pointer-events: none;
     }
-    .mobile-nav-overlay.visible { opacity: 1; }
+    .mobile-nav-overlay.visible { opacity: 1; pointer-events: auto; }
     .mobile-nav-drawer {
       position: fixed; top: 0; right: 0;
       width: min(280px, 80vw); height: 100%;
@@ -377,8 +378,9 @@
       transition: transform 0.35s cubic-bezier(0.22,1,0.36,1);
       padding: 100px 28px 40px;
       display: flex; flex-direction: column; gap: 6px;
+      pointer-events: none;
     }
-    .mobile-nav-drawer.open { transform: translateX(0); }
+    .mobile-nav-drawer.open { transform: translateX(0); pointer-events: auto; }
     .mobile-nav-drawer a {
       display: block; color: rgba(180,215,255,0.75); text-decoration: none;
       font-family: 'Exo 2', sans-serif; font-size: 1.05rem; font-weight: 500;
@@ -423,7 +425,7 @@
       <li><a href="index.html">Home</a></li>
       <li><a href="courses.html">Courses</a></li>
       <li><a href="contact.html">Contact</a></li>
-      <li><a href="register.html"><button class="btn-enroll">Enroll Now</button></a></li>
+      <li><a href="register.html" class="btn-enroll">Enroll Now</a></li>
     </ul>
     <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="false">
       <span></span><span></span><span></span>
