@@ -65,10 +65,18 @@
 
     /* ── CONTACT INFO CARDS ── */
     .contact-cards-section { background: #f0f4f8; padding: 60px 40px 0; }
-    .contact-cards-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
-    .contact-info-card { background: #fff; border: 1px solid #e2eaf2; border-radius: 14px; padding: 32px 24px 28px; text-align: center; transition: box-shadow 0.22s, transform 0.22s; }
+    .contact-cards-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px;
+    }
+    .contact-info-card {
+      background: #fff; border: 1px solid #e2eaf2; border-radius: 14px;
+      padding: 32px 24px 28px; text-align: center;
+      transition: box-shadow 0.22s, transform 0.22s;
+      min-width: 0; overflow: hidden; word-break: break-word;
+    }
     .contact-info-card:hover { box-shadow: 0 8px 28px rgba(0,80,180,0.1); transform: translateY(-3px); }
-    .cic-icon { width: 54px; height: 54px; border-radius: 50%; background: #f0f5fb; border: 1.5px solid #dce8f4; display: flex; align-items: center; justify-content: center; margin: 0 auto 18px; color: #4a7ab5; }
+    .cic-icon { width: 54px; height: 54px; border-radius: 50%; background: #f0f5fb; border: 1.5px solid #dce8f4; display: flex; align-items: center; justify-content: center; margin: 0 auto 18px; color: #4a7ab5; flex-shrink: 0; }
     .cic-title { font-family: 'Exo 2', sans-serif; font-size: 1rem; font-weight: 700; color: #0d1f35; margin-bottom: 8px; }
     .cic-detail { font-size: 0.84rem; color: #5a7090; line-height: 1.65; }
     .cic-detail a { color: #5a7090; text-decoration: none; }
@@ -154,7 +162,9 @@
     .response-badge { display: flex; align-items: center; gap: 8px; background: #eef6ff; border: 1px solid #c8dff5; border-radius: 10px; padding: 12px 16px; font-size: 0.82rem; color: #4a7ab5; }
     .response-badge strong { color: #0077b6; }
 
-    /* ── RESPONSIVE — full breakpoint ladder ── */
+    /* ═══════════════════════════════
+       RESPONSIVE — full breakpoint ladder
+    ═══════════════════════════════ */
 
     /* 320px extra-small */
     @media (max-width: 374px) {
@@ -166,7 +176,7 @@
       .page-header { padding: 80px 12px 44px; }
       .contact-cards-section { padding: 28px 12px 0; }
       .contact-cards-inner { grid-template-columns: 1fr; gap: 10px; }
-      .contact-info-card { padding: 18px 12px 14px; }
+      .contact-info-card { padding: 18px 16px 14px; }
       .contact-main { grid-template-columns: 1fr; gap: 22px; padding: 26px 12px 52px; }
       .form-row { grid-template-columns: 1fr; }
       .contact-form-box { padding: 22px 14px; }
@@ -183,7 +193,9 @@
       .logo-tagline { font-size: 0.48rem; }
       .nav-links { display: none; }
       .page-header { padding: 82px 14px 46px; }
-      .contact-cards-inner { grid-template-columns: 1fr 1fr; gap: 10px; }
+      .contact-cards-section { padding: 28px 12px 0; }
+      .contact-cards-inner { grid-template-columns: 1fr; gap: 10px; }
+      .contact-info-card { padding: 18px 16px 14px; }
       .contact-main { grid-template-columns: 1fr; gap: 24px; padding: 28px 14px 54px; }
       .form-row { grid-template-columns: 1fr; }
       .contact-form-box { padding: 24px 16px; }
@@ -197,7 +209,9 @@
       .logo-text { font-size: 0.9rem; }
       .nav-links { display: none; }
       .page-header { padding: 84px 16px 48px; }
-      .contact-cards-inner { grid-template-columns: 1fr 1fr; gap: 10px; }
+      .contact-cards-section { padding: 28px 14px 0; }
+      .contact-cards-inner { grid-template-columns: 1fr; gap: 10px; }
+      .contact-info-card { padding: 18px 16px 14px; }
       .contact-main { grid-template-columns: 1fr; gap: 24px; padding: 28px 16px 56px; }
       .form-row { grid-template-columns: 1fr; }
       .contact-form-box { padding: 24px 16px; }
@@ -211,7 +225,9 @@
       .logo-text { font-size: 0.95rem; }
       .nav-links { display: none; }
       .page-header { padding: 86px 18px 50px; }
-      .contact-cards-inner { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .contact-cards-section { padding: 30px 14px 0; }
+      .contact-cards-inner { grid-template-columns: 1fr 1fr; gap: 10px; }
+      .contact-info-card { padding: 20px 14px 16px; }
       .contact-main { grid-template-columns: 1fr; gap: 26px; padding: 30px 18px 58px; }
       .form-row { grid-template-columns: 1fr; }
       .contact-form-box { padding: 26px 18px; }
@@ -225,7 +241,9 @@
       .logo-text { font-size: 0.95rem; }
       .nav-links { display: none; }
       .page-header { padding: 88px 20px 52px; }
+      .contact-cards-section { padding: 32px 16px 0; }
       .contact-cards-inner { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .contact-info-card { padding: 22px 16px 18px; }
       .contact-main { grid-template-columns: 1fr; gap: 26px; padding: 30px 20px 60px; }
       .form-row { grid-template-columns: 1fr; }
       .contact-form-box { padding: 26px 18px; }
@@ -452,24 +470,21 @@
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
       </div>
       <div class="cic-title">Visit Us</div>
-      <div class="cic-detail"> Vijayanagar, Bengaluru, Karnataka 560040, India</div>
+      <div class="cic-detail">Balaji Complex, metro station, 1st floor, 15th Cross Rd, behind vijayanagara, Govindaraja Nagar Ward, MC Layout, Vijayanagar, Bengaluru, Karnataka 560040, India</div>
     </div>
     <div class="contact-info-card">
       <div class="cic-icon">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.7 12a19.79 19.79 0 0 1-3-8.57A2 2 0 0 1 3.63 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
       </div>
       <div class="cic-title">Call Us</div>
-      <div class="cic-detail">91 9742529364</div>
+      <div class="cic-detail">+91 9742529364</div>
     </div>
     <div class="contact-info-card">
       <div class="cic-icon">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
       </div>
       <div class="cic-title">Email Us</div>
-      <div class="cic-detail">
-        <div class="cic-detail">contactus@nextgatesemi.com</div>
-        <!--<a href="mailto:admissions@nxtgatesemi.com">contactus@nextgatesemi.com</a>-->
-      </div>
+      <div class="cic-detail">contactus@nextgatesemi.com</div>
     </div>
     <div class="contact-info-card">
       <div class="cic-icon">
@@ -491,7 +506,7 @@
 
     <div class="info-item">
       <div class="info-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
-      <div class="info-text"><label>Address</label><span>Balaji Complex, metro station, 1stfloor, 15th Cross Rd, behind vijayanagara, Govindaraja Nagar Ward, MC Layout, Vijayanagar, Bengaluru, Karnataka 560040, India</span></div>
+      <div class="info-text"><label>Address</label><span>Balaji Complex, metro station, 1st floor, 15th Cross Rd, behind vijayanagara, Govindaraja Nagar Ward, MC Layout, Vijayanagar, Bengaluru, Karnataka 560040, India</span></div>
     </div>
     <div class="info-item">
       <div class="info-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.7 12a19.79 19.79 0 0 1-3-8.57A2 2 0 0 1 3.63 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
@@ -499,45 +514,28 @@
     </div>
     <div class="info-item">
       <div class="info-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-      <div class="info-text"><label>Email</label><span><a href="mailto:contactus@nextgatesemi.com"><span class="__cf_email__" data-cfemail="9ffcf0f1ebfefcebeaecdff1e7ebf8feebfaecfaf2f6b1fcf0f2">contactus@nextgatesemi.com</span></a><br></div>
+      <div class="info-text"><label>Email</label><span><a href="mailto:contactus@nextgatesemi.com">contactus@nextgatesemi.com</a></span></div>
     </div>
     <div class="info-item">
       <div class="info-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
       <div class="info-text"><label>Office Hours</label><span>Mon – Sat: 9:00 AM – 9:00 PM</span></div>
     </div>
 
-<div class="map-box">
-  <!-- FIXED clickable overlay -->
-  <a href="https://www.google.com/maps/search/?api=1&query=NxtGate+Semiconductors+Bengaluru"
-     target="_blank"
-     class="map-link"
-     aria-label="Open location in Google Maps">
-  </a>
-
-  <!-- Map Embed (keep same) -->
-  <iframe
-    src="https://maps.google.com/maps?q=12.9710289,77.5367426&z=17&output=embed"
-    width="100%"
-    height="350"
-    style="border:0;"
-    allowfullscreen=""
-    loading="lazy">
-  </iframe>
-</div>
-    <!--<div class="social-row">
-      <a href="#" class="social-btn">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
-        LinkedIn
+    <div class="map-box">
+      <a href="https://www.google.com/maps/search/?api=1&query=NxtGate+Semiconductors+Bengaluru"
+         target="_blank"
+         class="map-link"
+         aria-label="Open location in Google Maps">
       </a>
-      <a href="#" class="social-btn">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-        Twitter / X
-      </a>
-      <a href="#" class="social-btn">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-1.96C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.4 19.54C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58zM9.75 15.02V8.98L15.5 12z"/></svg>
-        YouTube
-      </a>
-    </div>-->
+      <iframe
+        src="https://maps.google.com/maps?q=12.9710289,77.5367426&z=17&output=embed"
+        width="100%"
+        height="350"
+        style="border:0;"
+        allowfullscreen=""
+        loading="lazy">
+      </iframe>
+    </div>
   </div>
 
   <!-- Right: Visual Panel -->
@@ -648,14 +646,13 @@
         <li><a href="courses.html" style="font-size:0.85rem;color:rgba(180,215,255,0.55);text-decoration:none;">VVLSI Internship</a></li>
         <li><a href="courses.html" style="font-size:0.85rem;color:rgba(180,215,255,0.55);text-decoration:none;">VLSI Project</a></li>
         <li><a href="courses.html" style="font-size:0.85rem;color:rgba(180,215,255,0.55);text-decoration:none;">Training & Placement</a></li>
-       <!--- <li><a href="courses.html" style="font-size:0.85rem;color:rgba(180,215,255,0.55);text-decoration:none;">Analog IC Design</a></li>-->
       </ul>
     </div>
     <div>
       <h4 style="font-family:'Rajdhani',sans-serif;font-size:1rem;font-weight:700;color:#fff;margin-bottom:18px;">Contact Us</h4>
-      <p style="font-size:0.83rem;color:rgba(180,215,255,0.55);margin-bottom:8px;">📍 Vijayanagar, Bengaluru, Karnataka 560040, India</p>
+      <p style="font-size:0.83rem;color:rgba(180,215,255,0.55);margin-bottom:8px;">📍 Balaji Complex, metro station, 1st floor, 15th Cross Rd, behind vijayanagara, Govindaraja Nagar Ward, MC Layout, Vijayanagar, Bengaluru, Karnataka 560040, India</p>
       <p style="font-size:0.83rem;color:rgba(180,215,255,0.55);margin-bottom:8px;">📞 +91 9742529364</p>
-      <p style="font-size:0.83rem;color:rgba(180,215,255,0.55);">✉️ <a href="#" class="__cf_email__" data-cfemail="f6959998829795828385b698938e829197829385939b9fd895999b"> contactus@nextgatesemi.com</a></p>
+      <p style="font-size:0.83rem;color:rgba(180,215,255,0.55);margin-bottom:8px;">✉️ contactus@nextgatesemi.com</p>
     </div>
   </div>
   <div style="border-top:1px solid rgba(0,198,255,0.08);padding:18px 40px;text-align:center;">
@@ -663,7 +660,7 @@
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="module">
+<script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
   import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
 
